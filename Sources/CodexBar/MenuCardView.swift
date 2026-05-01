@@ -11,15 +11,15 @@ struct UsageMenuCardView: View {
 
             var labelSuffix: String {
                 switch self {
-                case .left: "left"
-                case .used: "used"
+                case .left: PrototypeChineseLocalization.text("left")
+                case .used: PrototypeChineseLocalization.text("used")
                 }
             }
 
             var accessibilityLabel: String {
                 switch self {
-                case .left: "Usage remaining"
-                case .used: "Usage used"
+                case .left: PrototypeChineseLocalization.accessibilityUsageLabel(showUsed: false)
+                case .used: PrototypeChineseLocalization.accessibilityUsageLabel(showUsed: true)
                 }
             }
         }
@@ -112,9 +112,9 @@ struct UsageMenuCardView: View {
 
     static func popupMetricTitle(provider: UsageProvider, metric: Model.Metric) -> String {
         if provider == .openrouter, metric.id == "primary" {
-            return "API key limit"
+            return "API Key 限额"
         }
-        return metric.title
+        return PrototypeChineseLocalization.text(metric.title)
     }
 
     var body: some View {
@@ -177,7 +177,7 @@ struct UsageMenuCardView: View {
                     }
                     if let tokenUsage = self.model.tokenUsage {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("Cost")
+                            Text(PrototypeChineseLocalization.text("Cost"))
                                 .font(.body)
                                 .fontWeight(.medium)
                             Text(tokenUsage.sessionLine)
@@ -333,12 +333,14 @@ private struct ProviderCostContent: View {
             UsageProgressBar(
                 percent: self.section.percentUsed,
                 tint: self.progressColor,
-                accessibilityLabel: "Extra usage spent")
+                accessibilityLabel: PrototypeChineseLocalization.providerCostAccessibilityLabel())
             HStack(alignment: .firstTextBaseline) {
                 Text(self.section.spendLine)
                     .font(.footnote)
                 Spacer()
-                Text(String(format: "%.0f%% used", min(100, max(0, self.section.percentUsed))))
+                Text(PrototypeChineseLocalization.percentLabel(
+                    min(100, max(0, self.section.percentUsed)),
+                    showUsed: true))
                     .font(.footnote)
                     .foregroundStyle(MenuHighlightStyle.secondary(self.isHighlighted))
             }
@@ -541,14 +543,14 @@ private struct CreditsBarContent: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("Credits")
+            Text("积分")
                 .font(.body)
                 .fontWeight(.medium)
             if let percentLeft {
                 UsageProgressBar(
                     percent: percentLeft,
                     tint: self.progressColor,
-                    accessibilityLabel: "Credits remaining")
+                    accessibilityLabel: "剩余积分")
                 HStack(alignment: .firstTextBaseline) {
                     Text(self.creditsText)
                         .font(.caption)
@@ -589,7 +591,7 @@ struct UsageMenuCardCostSectionView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     if let tokenUsage = self.model.tokenUsage {
                         VStack(alignment: .leading, spacing: 6) {
-                            Text("Cost")
+                            Text(PrototypeChineseLocalization.text("Cost"))
                                 .font(.body)
                                 .fontWeight(.medium)
                             Text(tokenUsage.sessionLine)
@@ -755,7 +757,9 @@ extension UsageMenuCardView.Model {
             isRefreshing: input.isRefreshing,
             lastError: input.lastError)
         let redacted = Self.redactedText(input: input, subtitle: subtitle)
-        let placeholder = input.snapshot == nil && !input.isRefreshing && input.lastError == nil ? "No usage yet" : nil
+        let placeholder = input.snapshot == nil && !input.isRefreshing && input.lastError == nil
+            ? PrototypeChineseLocalization.text("No usage yet")
+            : nil
 
         return UsageMenuCardView.Model(
             provider: input.provider,
@@ -849,7 +853,8 @@ extension UsageMenuCardView.Model {
 
     private static func planDisplay(_ text: String) -> String {
         let cleaned = CodexPlanFormatting.displayName(text) ?? UsageFormatter.cleanPlanName(text)
-        return cleaned.isEmpty ? text : cleaned
+        let display = cleaned.isEmpty ? text : cleaned
+        return PrototypeChineseLocalization.planName(display)
     }
 
     private static func kiloLoginPass(snapshot: UsageSnapshot?) -> String? {
@@ -893,14 +898,14 @@ extension UsageMenuCardView.Model {
         }
 
         if isRefreshing, snapshot == nil {
-            return ("Refreshing...", .loading)
+            return (PrototypeChineseLocalization.text("Refreshing..."), .loading)
         }
 
         if let updated = snapshot?.updatedAt {
             return (UsageFormatter.updatedString(from: updated), .info)
         }
 
-        return ("Not fetched yet", .info)
+        return (PrototypeChineseLocalization.text("Not fetched yet"), .info)
     }
 
     private struct RedactedText {

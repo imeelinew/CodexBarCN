@@ -29,28 +29,30 @@ enum UsagePaceText {
         let deltaValue = Int(abs(pace.deltaPercent).rounded())
         switch pace.stage {
         case .onTrack:
-            return "On pace"
+            return PrototypeChineseLocalization.text("On pace")
         case .slightlyAhead, .ahead, .farAhead:
-            return "\(deltaValue)% in deficit"
+            return PrototypeChineseLocalization.paceDeficit(deltaValue)
         case .slightlyBehind, .behind, .farBehind:
-            return "\(deltaValue)% in reserve"
+            return PrototypeChineseLocalization.paceReserve(deltaValue)
         }
     }
 
     private static func detailRightLabel(for pace: UsagePace, now: Date) -> String? {
         let etaLabel: String?
         if pace.willLastToReset {
-            etaLabel = "Lasts until reset"
+            etaLabel = PrototypeChineseLocalization.text("Lasts until reset")
         } else if let etaSeconds = pace.etaSeconds {
             let etaText = Self.durationText(seconds: etaSeconds, now: now)
-            etaLabel = etaText == "now" ? "Runs out now" : "Runs out in \(etaText)"
+            etaLabel = etaText == "现在"
+                ? PrototypeChineseLocalization.text("Runs out now")
+                : PrototypeChineseLocalization.runOutIn(etaText)
         } else {
             etaLabel = nil
         }
 
         guard let runOutProbability = pace.runOutProbability else { return etaLabel }
         let roundedRisk = self.roundedRiskPercent(runOutProbability)
-        let riskLabel = "≈ \(roundedRisk)% run-out risk"
+        let riskLabel = PrototypeChineseLocalization.runOutRisk(roundedRisk)
         if let etaLabel {
             return "\(etaLabel) · \(riskLabel)"
         }
@@ -60,8 +62,7 @@ enum UsagePaceText {
     private static func durationText(seconds: TimeInterval, now: Date) -> String {
         let date = now.addingTimeInterval(seconds)
         let countdown = UsageFormatter.resetCountdownDescription(from: date, now: now)
-        if countdown == "now" { return "now" }
-        if countdown.hasPrefix("in ") { return String(countdown.dropFirst(3)) }
+        if countdown == "现在" { return "现在" }
         return countdown
     }
 

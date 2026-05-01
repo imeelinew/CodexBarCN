@@ -35,7 +35,8 @@ public enum CodexPlanFormatting {
         guard !components.isEmpty else { return candidate }
 
         let formatted = components.map(Self.wordDisplayName).joined(separator: " ")
-        return formatted.isEmpty ? candidate : formatted
+        let display = formatted.isEmpty ? candidate : formatted
+        return PrototypeChineseLocalization.planName(display)
     }
 
     private static func wordDisplayName(_ raw: String) -> String {

@@ -68,7 +68,7 @@ final class ProviderSwitcherView: NSView {
                 Segment(
                     selection: .overview,
                     image: overviewIcon,
-                    title: "Overview"),
+                    title: PrototypeChineseLocalization.text("Overview")),
                 at: 0)
         }
         self.segments = segments

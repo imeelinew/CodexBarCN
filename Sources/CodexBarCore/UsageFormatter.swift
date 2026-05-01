@@ -9,13 +9,12 @@ public enum UsageFormatter {
     public static func usageLine(remaining: Double, used: Double, showUsed: Bool) -> String {
         let percent = showUsed ? used : remaining
         let clamped = min(100, max(0, percent))
-        let suffix = showUsed ? "used" : "left"
-        return String(format: "%.0f%% %@", clamped, suffix)
+        return PrototypeChineseLocalization.percentLabel(clamped, showUsed: showUsed)
     }
 
     public static func resetCountdownDescription(from date: Date, now: Date = .init()) -> String {
         let seconds = max(0, date.timeIntervalSince(now))
-        if seconds < 1 { return "now" }
+        if seconds < 1 { return "现在" }
 
         let totalMinutes = max(1, Int(ceil(seconds / 60.0)))
         let days = totalMinutes / (24 * 60)
@@ -23,14 +22,14 @@ public enum UsageFormatter {
         let minutes = totalMinutes % 60
 
         if days > 0 {
-            if hours > 0 { return "in \(days)d \(hours)h" }
-            return "in \(days)d"
+            if hours > 0 { return "\(days)天\(hours)小时后" }
+            return "\(days)天后"
         }
         if hours > 0 {
-            if minutes > 0 { return "in \(hours)h \(minutes)m" }
-            return "in \(hours)h"
+            if minutes > 0 { return "\(hours)小时\(minutes)分钟后" }
+            return "\(hours)小时后"
         }
-        return "in \(totalMinutes)m"
+        return "\(totalMinutes)分钟后"
     }
 
     public static func resetDescription(from date: Date, now: Date = .init()) -> String {
@@ -42,9 +41,9 @@ public enum UsageFormatter {
         if let tomorrow = calendar.date(byAdding: .day, value: 1, to: now),
            calendar.isDate(date, inSameDayAs: tomorrow)
         {
-            return "tomorrow, \(date.formatted(date: .omitted, time: .shortened))"
+            return "明天 \(date.formatted(date: .omitted, time: .shortened))"
         }
-        return date.formatted(date: .abbreviated, time: .shortened)
+        return date.formatted(.dateTime.year().month().day().hour().minute().locale(Locale(identifier: "zh_Hans")))
     }
 
     public static func resetLine(
@@ -56,14 +55,14 @@ public enum UsageFormatter {
             let text = style == .countdown
                 ? self.resetCountdownDescription(from: date, now: now)
                 : self.resetDescription(from: date, now: now)
-            return "Resets \(text)"
+            return "\(text)重置"
         }
 
         if let desc = window.resetDescription {
             let trimmed = desc.trimmingCharacters(in: .whitespacesAndNewlines)
             guard !trimmed.isEmpty else { return nil }
-            if trimmed.lowercased().hasPrefix("resets") { return trimmed }
-            return "Resets \(trimmed)"
+            if trimmed.lowercased().hasPrefix("resets") { return PrototypeChineseLocalization.text(trimmed) }
+            return "\(trimmed)重置"
         }
         return nil
     }
@@ -71,24 +70,25 @@ public enum UsageFormatter {
     public static func updatedString(from date: Date, now: Date = .init()) -> String {
         let delta = now.timeIntervalSince(date)
         if abs(delta) < 60 {
-            return "Updated just now"
+            return "刚刚更新"
         }
         if let hours = Calendar.current.dateComponents([.hour], from: date, to: now).hour, hours < 24 {
             #if os(macOS)
             let rel = RelativeDateTimeFormatter()
             rel.unitsStyle = .abbreviated
-            return "Updated \(rel.localizedString(for: date, relativeTo: now))"
+            rel.locale = Locale(identifier: "zh_Hans")
+            return "\(rel.localizedString(for: date, relativeTo: now))更新"
             #else
             let seconds = max(0, Int(now.timeIntervalSince(date)))
             if seconds < 3600 {
                 let minutes = max(1, seconds / 60)
-                return "Updated \(minutes)m ago"
+                return "\(minutes)分钟前更新"
             }
             let wholeHours = max(1, seconds / 3600)
-            return "Updated \(wholeHours)h ago"
+            return "\(wholeHours)小时前更新"
             #endif
         } else {
-            return "Updated \(date.formatted(date: .omitted, time: .shortened))"
+            return "更新于 \(date.formatted(date: .omitted, time: .shortened))"
         }
     }
 
@@ -99,7 +99,7 @@ public enum UsageFormatter {
         // Use explicit locale for consistent formatting on all systems
         number.locale = Locale(identifier: "en_US_POSIX")
         let formatted = number.string(from: NSNumber(value: value)) ?? String(format: "%.2f", value)
-        return "\(formatted) left"
+        return "\(formatted) 剩余"
     }
 
     /// Formats a USD value with proper negative handling and thousand separators.
