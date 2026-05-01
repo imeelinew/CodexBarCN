@@ -14,7 +14,7 @@ This checkout is not being maintained as a polished upstream-style product branc
 ## Current git topology
 
 - Local upstream remote: `origin -> https://github.com/steipete/codexbar`
-- User fork remote: `fork -> https://github.com/imeelinew/CodexBarCN.git`
+- User fork remote: `fork -> https://github.com/imeelinew/CodexBarCN.git` (private; repo name kept for now even though local app was un-renamed)
 - Working branch for localized version: `codex/zh-cn-ui-prototype`
 - Current fork push target: `fork/codex/zh-cn-ui-prototype`
 
@@ -117,27 +117,19 @@ Why `--debug-lldb`:
 
 ## Official app vs local test app isolation
 
-Official installed app observed on this machine:
-
-- `/Applications/CodexBar.app`
-- bundle id: `com.steipete.codexbar`
-
-Local built test app in this repo:
+The user has removed `/Applications/CodexBar.app` from this machine to avoid confusion with the local build, so right now there is only one CodexBar in play:
 
 - `/Users/eli/Dev/codexbar/CodexBar.app`
 - debug bundle id when built with debug packaging: `com.steipete.codexbar.debug`
 
-App-group/container separation:
+The bundle id is **deliberately still `.debug`-suffixed** even though there is no official app to collide with. Reasoning: if the user reinstalls `/Applications/CodexBar.app` later, the local build will keep its own state under separate app group / preferences domains:
 
-- official group: `~/Library/Group Containers/Y5PE65HELJ.com.steipete.codexbar`
+- would-be official group: `~/Library/Group Containers/Y5PE65HELJ.com.steipete.codexbar`
 - debug group: `~/Library/Group Containers/Y5PE65HELJ.com.steipete.codexbar.debug`
-
-Preference domain separation:
-
-- official plist: `~/Library/Preferences/com.steipete.codexbar.plist`
+- would-be official plist: `~/Library/Preferences/com.steipete.codexbar.plist`
 - debug plist: `~/Library/Preferences/com.steipete.codexbar.debug.plist`
 
-This separation is desired. Do not collapse it.
+Do not collapse the `.debug` suffix into the bare bundle id.
 
 ## Config/state cloning rule used for local testing
 

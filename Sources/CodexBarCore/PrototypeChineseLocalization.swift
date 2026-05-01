@@ -52,7 +52,11 @@ public enum PrototypeChineseLocalization {
         "Show cost summary": "显示成本汇总",
         "Refresh cadence": "刷新频率",
         "Check provider status": "检查提供方状态",
+        "Polls OpenAI/Claude status pages and Google Workspace for Gemini/Antigravity, surfacing incidents in the icon and menu.":
+            "轮询 OpenAI/Claude 状态页和 Google Workspace（Gemini/Antigravity），并在图标和菜单中提示故障。",
         "Session quota notifications": "会话配额通知",
+        "Notifies when the 5-hour session quota hits 0% and when it becomes available again.":
+            "当 5 小时会话配额降到 0% 以及再次可用时进行通知。",
         "Merge Icons": "合并图标",
         "Switcher shows icons": "切换器显示图标",
         "Show most-used provider": "显示使用最多的提供方",
