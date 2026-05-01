@@ -1,5 +1,6 @@
 import SwiftUI
 
+// swiftformat:disable environmentEntry
 private struct MenuItemHighlightedEnvironmentKey: EnvironmentKey {
     static let defaultValue = false
 }
@@ -40,3 +41,5 @@ enum MenuHighlightStyle {
         highlighted ? Color(nsColor: .selectedContentBackgroundColor) : .clear
     }
 }
+
+// swiftformat:enable environmentEntry

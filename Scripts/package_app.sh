@@ -188,7 +188,7 @@ for ARCH in "${ARCH_LIST[@]}"; do
   swift build -c "$CONF" --arch "$ARCH"
 done
 
-APP="$ROOT/CodexBar.app"
+APP="$ROOT/CodexBarCN.app"
 rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
 mkdir -p "$APP/Contents/Helpers" "$APP/Contents/PlugIns"
@@ -262,8 +262,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleName</key><string>CodexBar</string>
-    <key>CFBundleDisplayName</key><string>CodexBar</string>
+    <key>CFBundleName</key><string>CodexBarCN</string>
+    <key>CFBundleDisplayName</key><string>CodexBarCN</string>
     <key>CFBundleIdentifier</key><string>${BUNDLE_ID}</string>
     <key>CFBundleExecutable</key><string>CodexBar</string>
     <key>CFBundlePackageType</key><string>APPL</string>
@@ -367,7 +367,7 @@ if [[ -n "$(resolve_binary_path "CodexBarWidget" "${ARCH_LIST[0]}")" ]]; then
 <plist version="1.0">
 <dict>
     <key>CFBundleName</key><string>CodexBarWidget</string>
-    <key>CFBundleDisplayName</key><string>CodexBar</string>
+    <key>CFBundleDisplayName</key><string>CodexBarCN</string>
     <key>CFBundleIdentifier</key><string>${WIDGET_BUNDLE_ID}</string>
     <key>CFBundleExecutable</key><string>CodexBarWidget</string>
     <key>CFBundlePackageType</key><string>XPC!</string>

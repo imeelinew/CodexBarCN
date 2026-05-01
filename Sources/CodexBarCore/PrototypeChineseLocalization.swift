@@ -12,7 +12,7 @@ public enum PrototypeChineseLocalization {
         "Code review": "代码审查",
         "Refresh": "刷新",
         "Settings...": "设置...",
-        "About CodexBar": "关于 CodexBar",
+        "About CodexBarCN": "关于 CodexBarCN",
         "Quit": "退出",
         "Account": "账号",
         "Plan": "套餐",

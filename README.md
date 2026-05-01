@@ -1,6 +1,6 @@
-# CodexBar agent-handoff README
+# CodexBarCN agent-handoff README
 
-This checkout is not being maintained as a polished upstream-style product branch. This is a personal-use fork/branch whose only goal is: keep CodexBar pleasant to look at for the local user, especially by Chinese-localizing the main menu/home UI, while staying easy to rebase on top of upstream `steipete/codexbar`.
+This checkout is not being maintained as a polished upstream-style product branch. This is a personal-use fork/branch whose only goal is: keep CodexBarCN pleasant to look at for the local user, especially by Chinese-localizing the main menu/home UI, while staying easy to rebase on top of upstream `steipete/codexbar`.
 
 ## Operating intent
 
@@ -14,7 +14,7 @@ This checkout is not being maintained as a polished upstream-style product branc
 ## Current git topology
 
 - Local upstream remote: `origin -> https://github.com/steipete/codexbar`
-- User fork remote: `fork -> https://github.com/imeelinew/CodexBar.git`
+- User fork remote: `fork -> https://github.com/imeelinew/CodexBarCN.git`
 - Working branch for localized version: `codex/zh-cn-ui-prototype`
 - Current fork push target: `fork/codex/zh-cn-ui-prototype`
 
@@ -41,7 +41,7 @@ Covered areas:
 - Main menu card labels like `Session`, `Weekly`, `Designs`, `Daily Routines`
 - Percent/status wording like `used`, `left`, `Updated`, `Resets`, countdown/reset phrasing
 - Pace/risk phrasing
-- Bottom menu items like `Refresh`, `Settings...`, `About CodexBar`, `Quit`
+- Bottom menu items like `Refresh`, `Settings...`, `About CodexBarCN`, `Quit`
 - Simple plan-name display normalization
 - Minimal menu/account label localization like `Account`, `Plan`, `Quota`
 
@@ -124,7 +124,7 @@ Official installed app observed on this machine:
 
 Local built test app in this repo:
 
-- `/Users/eli/Dev/codexbar/CodexBar.app`
+- `/Users/eli/Dev/codexbar/CodexBarCN.app`
 - debug bundle id when built with debug packaging: `com.steipete.codexbar.debug`
 
 App-group/container separation:
@@ -190,6 +190,29 @@ Tracked workaround:
 - replace macro-based environment extension with explicit `EnvironmentKey`
 - this change is committed/tracked in this branch
 
+### 3. Sparkle is intentionally disabled for local self-use builds
+
+Observed issue:
+
+- renamed local packaged app could end up failing at runtime while loading `Sparkle.framework`
+- for this user, local self-use stability matters more than embedded auto-update support
+
+Tracked workaround:
+
+- `Package.swift` now treats Sparkle as opt-in for local builds
+- default local build path does **not** link Sparkle and does **not** define `ENABLE_SPARKLE`
+- updater UI falls back to the existing disabled-updater path
+
+If a future agent explicitly wants Sparkle back for a test:
+
+```bash
+CODEXBAR_ENABLE_SPARKLE=1 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer ./Scripts/compile_and_run.sh --debug-lldb
+```
+
+Default assumption for this branch:
+
+- leave Sparkle disabled unless the user explicitly asks to re-enable it
+
 ## Lint/test/build expectations
 
 Repo guidance said after code/docs edits:
@@ -214,7 +237,7 @@ Build verification hierarchy on this machine:
 Runtime verification command:
 
 ```bash
-ps -axo pid,args | rg '(/Applications/CodexBar.app|/Users/eli/Dev/codexbar/CodexBar.app)/Contents/MacOS/CodexBar'
+ps -axo pid,args | rg '(/Applications/CodexBar.app|/Users/eli/Dev/codexbar/CodexBarCN.app)/Contents/MacOS/CodexBar'
 ```
 
 Desired post-test state for this user:
@@ -251,4 +274,4 @@ Desired post-test state for this user:
 
 ## Current branch purpose summary in one line
 
-Upstream CodexBar + local-user-focused Chinese main-menu localization + debug-build isolation from official app + rebase-friendly thin translation layer + fork push target under `imeelinew/CodexBar`.
+Upstream CodexBar + local-user-focused Chinese main-menu localization + debug-build isolation from official app + rebase-friendly thin translation layer + fork push target under `imeelinew/CodexBarCN`.

@@ -6,6 +6,8 @@ import PackageDescription
 let sweetCookieKitPath = "../SweetCookieKit"
 let useLocalSweetCookieKit =
     ProcessInfo.processInfo.environment["CODEXBAR_USE_LOCAL_SWEETCOOKIEKIT"] == "1"
+let enableSparkle =
+    ProcessInfo.processInfo.environment["CODEXBAR_ENABLE_SPARKLE"] == "1"
 let sweetCookieKitDependency: Package.Dependency =
     useLocalSweetCookieKit && FileManager.default.fileExists(atPath: sweetCookieKitPath)
     ? .package(path: sweetCookieKitPath)
@@ -81,12 +83,11 @@ let package = Package(
             .executableTarget(
                 name: "CodexBar",
                 dependencies: [
-                    .product(name: "Sparkle", package: "Sparkle"),
                     .product(name: "KeyboardShortcuts", package: "KeyboardShortcuts"),
                     .product(name: "Vortex", package: "Vortex"),
                     "CodexBarMacroSupport",
                     "CodexBarCore",
-                ],
+                ] + (enableSparkle ? [.product(name: "Sparkle", package: "Sparkle")] : []),
                 path: "Sources/CodexBar",
                 resources: [
                     .process("Resources"),
@@ -94,8 +95,7 @@ let package = Package(
                 swiftSettings: [
                     // Opt into Swift 6 strict concurrency (approachable migration path).
                     .enableUpcomingFeature("StrictConcurrency"),
-                    .define("ENABLE_SPARKLE"),
-                ]),
+                ] + (enableSparkle ? [.define("ENABLE_SPARKLE")] : [])),
             .executableTarget(
                 name: "CodexBarWidget",
                 dependencies: ["CodexBarCore"],

@@ -261,6 +261,7 @@ private func makeUpdaterController() -> UpdaterProviding {
     return SparkleUpdaterController(savedAutoUpdate: savedAutoUpdate)
 }
 #else
+@MainActor
 private func makeUpdaterController() -> UpdaterProviding {
     DisabledUpdaterController()
 }

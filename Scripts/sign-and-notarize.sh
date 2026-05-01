@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="CodexBar"
+APP_NAME="CodexBarCN"
 APP_IDENTITY="Developer ID Application: Peter Steinberger (Y5PE65HELJ)"
-APP_BUNDLE="CodexBar.app"
+APP_BUNDLE="CodexBarCN.app"
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 source "$ROOT/version.env"
 ZIP_NAME="${APP_NAME}-${MARKETING_VERSION}.zip"
