@@ -1,3 +1,4 @@
+import CodexBarCore
 import Foundation
 
 enum UpdateChannel: String, CaseIterable, Codable {
@@ -10,18 +11,18 @@ enum UpdateChannel: String, CaseIterable, Codable {
     var displayName: String {
         switch self {
         case .stable:
-            "Stable"
+            PrototypeChineseLocalization.text("Stable")
         case .beta:
-            "Beta"
+            PrototypeChineseLocalization.text("Beta")
         }
     }
 
     var description: String {
         switch self {
         case .stable:
-            "Receive only stable, production-ready releases."
+            PrototypeChineseLocalization.stableDescription()
         case .beta:
-            "Receive stable releases plus beta previews."
+            PrototypeChineseLocalization.betaDescription()
         }
     }
 

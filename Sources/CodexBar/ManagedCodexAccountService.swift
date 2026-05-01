@@ -161,12 +161,12 @@ struct CodexWorkspaceAlertSelector: ManagedCodexWorkspaceSelecting {
         }
 
         let alert = NSAlert()
-        alert.messageText = "Choose Codex workspace"
-        alert.informativeText = "CodexBar found multiple workspaces for \(email). Choose the one to add."
+        alert.messageText = PrototypeChineseLocalization.text("Choose Codex workspace")
+        alert.informativeText = PrototypeChineseLocalization.workspacePrompt(email)
         alert.alertStyle = .informational
         alert.accessoryView = popup
-        alert.addButton(withTitle: "Add Workspace")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: PrototypeChineseLocalization.text("Add Workspace"))
+        alert.addButton(withTitle: PrototypeChineseLocalization.text("Cancel"))
 
         guard alert.runModal() == .alertFirstButtonReturn else {
             return nil

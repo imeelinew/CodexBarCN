@@ -1,4 +1,5 @@
 import AppKit
+import CodexBarCore
 import SwiftUI
 
 enum PreferencesTab: String, CaseIterable, Hashable {
@@ -15,12 +16,12 @@ enum PreferencesTab: String, CaseIterable, Hashable {
 
     var title: String {
         switch self {
-        case .general: "General"
-        case .providers: "Providers"
-        case .display: "Display"
-        case .advanced: "Advanced"
-        case .about: "About"
-        case .debug: "Debug"
+        case .general: PrototypeChineseLocalization.text("General")
+        case .providers: PrototypeChineseLocalization.text("Providers")
+        case .display: PrototypeChineseLocalization.text("Display")
+        case .advanced: PrototypeChineseLocalization.text("Advanced")
+        case .about: PrototypeChineseLocalization.text("About")
+        case .debug: PrototypeChineseLocalization.text("Debug")
         }
     }
 
@@ -67,7 +68,7 @@ struct PreferencesView: View {
     var body: some View {
         TabView(selection: self.$selection.tab) {
             GeneralPane(settings: self.settings, store: self.store)
-                .tabItem { Label("General", systemImage: "gearshape") }
+                .tabItem { Label(PrototypeChineseLocalization.text("General"), systemImage: "gearshape") }
                 .tag(PreferencesTab.general)
 
             ProvidersPane(
@@ -75,24 +76,24 @@ struct PreferencesView: View {
                 store: self.store,
                 managedCodexAccountCoordinator: self.managedCodexAccountCoordinator,
                 codexAccountPromotionCoordinator: self.codexAccountPromotionCoordinator)
-                .tabItem { Label("Providers", systemImage: "square.grid.2x2") }
+                .tabItem { Label(PrototypeChineseLocalization.text("Providers"), systemImage: "square.grid.2x2") }
                 .tag(PreferencesTab.providers)
 
             DisplayPane(settings: self.settings, store: self.store)
-                .tabItem { Label("Display", systemImage: "eye") }
+                .tabItem { Label(PrototypeChineseLocalization.text("Display"), systemImage: "eye") }
                 .tag(PreferencesTab.display)
 
             AdvancedPane(settings: self.settings)
-                .tabItem { Label("Advanced", systemImage: "slider.horizontal.3") }
+                .tabItem { Label(PrototypeChineseLocalization.text("Advanced"), systemImage: "slider.horizontal.3") }
                 .tag(PreferencesTab.advanced)
 
             AboutPane(updater: self.updater)
-                .tabItem { Label("About", systemImage: "info.circle") }
+                .tabItem { Label(PrototypeChineseLocalization.text("About"), systemImage: "info.circle") }
                 .tag(PreferencesTab.about)
 
             if self.settings.debugMenuEnabled {
                 DebugPane(settings: self.settings, store: self.store)
-                    .tabItem { Label("Debug", systemImage: "ladybug") }
+                    .tabItem { Label(PrototypeChineseLocalization.text("Debug"), systemImage: "ladybug") }
                     .tag(PreferencesTab.debug)
             }
         }

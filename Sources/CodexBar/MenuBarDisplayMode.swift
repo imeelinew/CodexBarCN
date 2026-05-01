@@ -1,3 +1,4 @@
+import CodexBarCore
 import Foundation
 
 /// Controls what the menu bar displays when brand icon mode is enabled.
@@ -12,17 +13,17 @@ enum MenuBarDisplayMode: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .percent: "Percent"
-        case .pace: "Pace"
-        case .both: "Both"
+        case .percent: PrototypeChineseLocalization.text("Percent")
+        case .pace: PrototypeChineseLocalization.text("Pace")
+        case .both: PrototypeChineseLocalization.text("Both")
         }
     }
 
     var description: String {
         switch self {
-        case .percent: "Show remaining/used percentage (e.g. 45%)"
-        case .pace: "Show pace indicator (e.g. +5%)"
-        case .both: "Show both percentage and pace (e.g. 45% · +5%)"
+        case .percent: PrototypeChineseLocalization.percentDescription()
+        case .pace: PrototypeChineseLocalization.paceDescription()
+        case .both: PrototypeChineseLocalization.bothDescription()
         }
     }
 }
