@@ -99,7 +99,7 @@ struct ProvidersPane: View {
                         }
                     })
             } else {
-                Text("Select a provider")
+                Text(PrototypeChineseLocalization.text("Select a provider"))
                     .foregroundStyle(.secondary)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
@@ -127,7 +127,7 @@ struct ProvidersPane: View {
                         active.onConfirm()
                         self.activeConfirmation = nil
                     }
-                    Button("Cancel", role: .cancel) { self.activeConfirmation = nil }
+                    Button(PrototypeChineseLocalization.text("Cancel"), role: .cancel) { self.activeConfirmation = nil }
                 }
             },
             message: {
@@ -303,9 +303,9 @@ struct ProvidersPane: View {
     func requestManagedCodexAccountRemoval(_ account: CodexVisibleAccount) {
         guard let accountID = account.storedAccountID else { return }
         self.activeConfirmation = ProviderSettingsConfirmationState(
-            title: "Remove Codex account?",
-            message: "Remove \(account.email) from CodexBar? Its managed Codex home will be deleted.",
-            confirmTitle: "Remove",
+            title: PrototypeChineseLocalization.text("Remove Codex account?"),
+            message: PrototypeChineseLocalization.removeCodexAccountMessage(account.email),
+            confirmTitle: PrototypeChineseLocalization.text("Remove"),
             onConfirm: {
                 Task { @MainActor in
                     await self.removeManagedCodexAccount(id: accountID)

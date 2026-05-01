@@ -109,6 +109,35 @@ public enum PrototypeChineseLocalization {
         "OK": "好",
         "Add Account...": "添加账号...",
         "Switch Account...": "切换账号...",
+        "Active": "活动",
+        "(System)": "（系统）",
+        "Accounts": "账号",
+        "Choose which Codex account CodexBar should follow.": "选择 CodexBar 应跟随的 Codex 账号。",
+        "No Codex accounts detected yet.": "尚未检测到 Codex 账号。",
+        "The default Codex account on this Mac.": "本机默认的 Codex 账号。",
+        "Remove": "移除",
+        "Remove Codex account?": "移除 Codex 账号？",
+        "No token accounts yet.": "尚未添加令牌账号。",
+        "Remove selected account": "移除选中账号",
+        "Add": "添加",
+        "Open token file": "打开令牌文件",
+        "Reload": "重新加载",
+        "Label": "标签",
+        "Select a provider": "请选择提供方",
+        "Settings": "设置",
+        "Options": "选项",
+        "Reorder": "重排序",
+        "Subscription Utilization": "订阅使用情况",
+        "No cost history data.": "暂无成本历史数据。",
+        "No credits history data.": "暂无积分历史数据。",
+        "No usage breakdown data.": "暂无用量分解数据。",
+        "Quota usage": "配额用量",
+        "Extra usage": "额外用量",
+        "This month": "本月",
+        "Near full": "接近满额",
+        "Full in ~1 regen": "约 1 次再生即满",
+        "used after next regen": "下次再生后已用",
+        "after next regen": "下次再生后",
         "On pace": "进度正常",
         "Lasts until reset": "可撑到重置",
         "Runs out now": "现在耗尽",
@@ -274,6 +303,50 @@ public enum PrototypeChineseLocalization {
 
     public static func keychainPrompt(_ message: String) -> String {
         message
+    }
+
+    public static func todayCost(_ cost: String) -> String {
+        "今日：\(cost)"
+    }
+
+    public static func todayCostWithTokens(cost: String, tokens: String) -> String {
+        "今日：\(cost) · \(tokens) tokens"
+    }
+
+    public static func last30DaysCost(_ cost: String) -> String {
+        "近 30 天：\(cost)"
+    }
+
+    public static func last30DaysCostWithTokens(cost: String, tokens: String) -> String {
+        "近 30 天：\(cost) · \(tokens) tokens"
+    }
+
+    public static func total30DaysUsd(_ cost: String) -> String {
+        "近 30 天合计：\(cost)"
+    }
+
+    public static func total30DaysCredits(_ amount: String) -> String {
+        "近 30 天合计：\(amount) 积分"
+    }
+
+    public static func fullInRegens(_ count: Double) -> String {
+        String(format: "约 %.0f 次再生即满", count)
+    }
+
+    public static func regenerates(_ countdown: String) -> String {
+        "\(countdown)再生"
+    }
+
+    public static func costSpendLine(period: String, used: String, limit: String) -> String {
+        "\(period)：\(used) / \(limit)"
+    }
+
+    public static func lastFetchFailed(_ providerName: String) -> String {
+        "上次获取 \(providerName) 失败："
+    }
+
+    public static func removeCodexAccountMessage(_ email: String) -> String {
+        "要将 \(email) 从 CodexBar 中移除吗？其托管的 Codex 主目录将被删除。"
     }
 
     public static func planName(_ text: String) -> String {

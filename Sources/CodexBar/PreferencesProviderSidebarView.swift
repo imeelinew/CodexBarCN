@@ -145,7 +145,7 @@ private struct ProviderSidebarReorderHandle: View {
             width: ProviderSettingsMetrics.reorderHandleSize,
             height: ProviderSettingsMetrics.reorderHandleSize)
         .foregroundStyle(.tertiary)
-        .accessibilityLabel("Reorder")
+        .accessibilityLabel(PrototypeChineseLocalization.text("Reorder"))
     }
 }
 

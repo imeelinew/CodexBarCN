@@ -1,3 +1,4 @@
+import CodexBarCore
 import Foundation
 import SwiftUI
 
@@ -132,11 +133,11 @@ struct CodexAccountsSectionView: View {
     let addAccount: () -> Void
 
     var body: some View {
-        ProviderSettingsSection(title: "Accounts") {
+        ProviderSettingsSection(title: PrototypeChineseLocalization.text("Accounts")) {
             if let selection = self.activeSelectionBinding {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline, spacing: 10) {
-                        Text("Active")
+                        Text(PrototypeChineseLocalization.text("Active"))
                             .font(.subheadline.weight(.semibold))
                             .frame(width: ProviderSettingsMetrics.pickerLabelWidth, alignment: .leading)
 
@@ -152,7 +153,7 @@ struct CodexAccountsSectionView: View {
                         Spacer(minLength: 0)
                     }
 
-                    Text("Choose which Codex account CodexBar should follow.")
+                    Text(PrototypeChineseLocalization.text("Choose which Codex account CodexBar should follow."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
 
@@ -166,7 +167,7 @@ struct CodexAccountsSectionView: View {
             } else if let account = self.state.singleVisibleAccount {
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline, spacing: 10) {
-                        Text("Account")
+                        Text(PrototypeChineseLocalization.text("Account"))
                             .font(.subheadline.weight(.semibold))
                             .frame(width: ProviderSettingsMetrics.pickerLabelWidth, alignment: .leading)
 
@@ -181,7 +182,7 @@ struct CodexAccountsSectionView: View {
             }
 
             if self.state.visibleAccounts.isEmpty {
-                Text("No Codex accounts detected yet.")
+                Text(PrototypeChineseLocalization.text("No Codex accounts detected yet."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             } else {
@@ -235,7 +236,7 @@ struct CodexAccountsSectionView: View {
     @ViewBuilder
     private func systemRow(selection: Binding<String>?) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
-            Text("System")
+            Text(PrototypeChineseLocalization.text("System"))
                 .font(.subheadline.weight(.semibold))
                 .frame(width: ProviderSettingsMetrics.pickerLabelWidth, alignment: .leading)
 
@@ -273,7 +274,7 @@ struct CodexAccountsSectionView: View {
             Spacer(minLength: 0)
         }
 
-        Text("The default Codex account on this Mac.")
+        Text(PrototypeChineseLocalization.text("The default Codex account on this Mac."))
             .font(.footnote)
             .foregroundStyle(.secondary)
     }
@@ -294,7 +295,7 @@ private struct CodexAccountsSectionRowView: View {
                 Text(self.account.displayName)
                     .font(.subheadline.weight(.semibold))
                 if self.showsSystemBadge {
-                    Text("(System)")
+                    Text(PrototypeChineseLocalization.text("(System)"))
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(.secondary)
                 }
@@ -312,7 +313,7 @@ private struct CodexAccountsSectionRowView: View {
             }
 
             if self.account.canRemove {
-                Button("Remove") {
+                Button(PrototypeChineseLocalization.text("Remove")) {
                     self.onRemove()
                 }
                 .buttonStyle(.bordered)

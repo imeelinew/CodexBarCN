@@ -1384,20 +1384,20 @@ extension UsageMenuCardView.Model {
         else { return nil }
 
         let countdown = UsageFormatter.resetCountdownDescription(from: resetsAt, now: now)
-        let resetText = "Regenerates \(countdown)"
+        let resetText = PrototypeChineseLocalization.regenerates(countdown)
 
         let nextRegenPercent = (nextRegenAmount / cost.limit) * 100
         let afterNextRegenRemaining = min(100, weekly.remainingPercent + nextRegenPercent)
         let afterNextRegen = showUsed ? max(0, 100 - afterNextRegenRemaining) : afterNextRegenRemaining
-        let suffix = showUsed ? "used after next regen" : "after next regen"
+        let suffix = PrototypeChineseLocalization.text(showUsed ? "used after next regen" : "after next regen")
         let ticksToFull = max(0, cost.used) / nextRegenAmount
         let left = String(format: "%.0f%% %@", afterNextRegen, suffix)
         let right = if ticksToFull <= 0.1 {
-            "Near full"
+            PrototypeChineseLocalization.text("Near full")
         } else if ticksToFull < 1.5 {
-            "Full in ~1 regen"
+            PrototypeChineseLocalization.text("Full in ~1 regen")
         } else {
-            String(format: "Full in ~%.0f regens", ceil(ticksToFull))
+            PrototypeChineseLocalization.fullInRegens(ceil(ticksToFull))
         }
         return (resetText, PaceDetail(leftLabel: left, rightLabel: right, pacePercent: nil, paceOnTop: true))
     }
@@ -1413,21 +1413,21 @@ extension UsageMenuCardView.Model {
         else { return nil }
 
         let countdown = UsageFormatter.resetCountdownDescription(from: resetsAt, now: now)
-        let resetText = "Regenerates \(countdown)"
+        let resetText = PrototypeChineseLocalization.regenerates(countdown)
 
         let afterNextRegenRemaining = min(100, window.remainingPercent + nextRegenPercent)
         let afterNextRegen = showUsed ? max(0, 100 - afterNextRegenRemaining) : afterNextRegenRemaining
-        let suffix = showUsed ? "used after next regen" : "after next regen"
+        let suffix = PrototypeChineseLocalization.text(showUsed ? "used after next regen" : "after next regen")
         let left = String(format: "%.0f%% %@", afterNextRegen, suffix)
 
         let missingPercent = max(0, window.usedPercent)
         let ticksToFull = missingPercent / nextRegenPercent
         let right = if ticksToFull <= 0.1 {
-            "Near full"
+            PrototypeChineseLocalization.text("Near full")
         } else if ticksToFull < 1.5 {
-            "Full in ~1 regen"
+            PrototypeChineseLocalization.text("Full in ~1 regen")
         } else {
-            String(format: "Full in ~%.0f regens", ceil(ticksToFull))
+            PrototypeChineseLocalization.fullInRegens(ceil(ticksToFull))
         }
 
         return (resetText, PaceDetail(leftLabel: left, rightLabel: right, pacePercent: nil, paceOnTop: true))
@@ -1467,9 +1467,9 @@ extension UsageMenuCardView.Model {
         let sessionTokens = snapshot.sessionTokens.map { UsageFormatter.tokenCountString($0) }
         let sessionLine: String = {
             if let sessionTokens {
-                return "Today: \(sessionCost) · \(sessionTokens) tokens"
+                return PrototypeChineseLocalization.todayCostWithTokens(cost: sessionCost, tokens: sessionTokens)
             }
-            return "Today: \(sessionCost)"
+            return PrototypeChineseLocalization.todayCost(sessionCost)
         }()
 
         let monthCost = snapshot.last30DaysCostUSD.map { UsageFormatter.usdString($0) } ?? "—"
@@ -1478,9 +1478,9 @@ extension UsageMenuCardView.Model {
         let monthTokens = monthTokensValue.map { UsageFormatter.tokenCountString($0) }
         let monthLine: String = {
             if let monthTokens {
-                return "Last 30 days: \(monthCost) · \(monthTokens) tokens"
+                return PrototypeChineseLocalization.last30DaysCostWithTokens(cost: monthCost, tokens: monthTokens)
             }
-            return "Last 30 days: \(monthCost)"
+            return PrototypeChineseLocalization.last30DaysCost(monthCost)
         }()
         let err = (error?.isEmpty ?? true) ? nil : error
         return TokenUsageSection(
@@ -1504,22 +1504,22 @@ extension UsageMenuCardView.Model {
         let title: String
 
         if cost.currencyCode == "Quota" {
-            title = "Quota usage"
+            title = PrototypeChineseLocalization.text("Quota usage")
             used = String(format: "%.0f", cost.used)
             limit = String(format: "%.0f", cost.limit)
         } else {
-            title = "Extra usage"
+            title = PrototypeChineseLocalization.text("Extra usage")
             used = UsageFormatter.currencyString(cost.used, currencyCode: cost.currencyCode)
             limit = UsageFormatter.currencyString(cost.limit, currencyCode: cost.currencyCode)
         }
 
         let percentUsed = Self.clamped((cost.used / cost.limit) * 100)
-        let periodLabel = cost.period ?? "This month"
+        let periodLabel = cost.period ?? PrototypeChineseLocalization.text("This month")
 
         return ProviderCostSection(
             title: title,
             percentUsed: percentUsed,
-            spendLine: "\(periodLabel): \(used) / \(limit)")
+            spendLine: PrototypeChineseLocalization.costSpendLine(period: periodLabel, used: used, limit: limit))
     }
 
     private static func clamped(_ value: Double) -> Double {

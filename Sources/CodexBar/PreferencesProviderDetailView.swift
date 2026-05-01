@@ -99,14 +99,15 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
 
                 if let errorDisplay {
                     ProviderErrorView(
-                        title: "Last \(self.store.metadata(for: self.provider).displayName) fetch failed:",
+                        title: PrototypeChineseLocalization.lastFetchFailed(
+                            self.store.metadata(for: self.provider).displayName),
                         display: errorDisplay,
                         isExpanded: self.$isErrorExpanded,
                         onCopy: { self.onCopyError(errorDisplay.full) })
                 }
 
                 if self.hasSettings {
-                    ProviderSettingsSection(title: "Settings") {
+                    ProviderSettingsSection(title: PrototypeChineseLocalization.text("Settings")) {
                         ForEach(self.settingsPickers) { picker in
                             ProviderSettingsPickerRowView(picker: picker)
                         }
@@ -126,7 +127,7 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
                 }
 
                 if !self.settingsToggles.isEmpty {
-                    ProviderSettingsSection(title: "Options") {
+                    ProviderSettingsSection(title: PrototypeChineseLocalization.text("Options")) {
                         ForEach(self.settingsToggles) { toggle in
                             ProviderSettingsToggleRowView(toggle: toggle)
                         }
