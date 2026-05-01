@@ -425,7 +425,7 @@ struct MenuDescriptor {
         entries.append(contentsOf: [
             .action(PrototypeChineseLocalization.text("Refresh"), .refresh),
             .action(PrototypeChineseLocalization.text("Settings..."), .settings),
-            .action(PrototypeChineseLocalization.text("About CodexBarCN"), .about),
+            .action(PrototypeChineseLocalization.text("About CodexBar"), .about),
             .action(PrototypeChineseLocalization.text("Quit"), .quit),
         ])
         return Section(entries: entries)

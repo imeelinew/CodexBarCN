@@ -1,6 +1,6 @@
-# CodexBarCN agent-handoff README
+# CodexBar agent-handoff README
 
-This checkout is not being maintained as a polished upstream-style product branch. This is a personal-use fork/branch whose only goal is: keep CodexBarCN pleasant to look at for the local user, especially by Chinese-localizing the main menu/home UI, while staying easy to rebase on top of upstream `steipete/codexbar`.
+This checkout is not being maintained as a polished upstream-style product branch. This is a personal-use fork/branch whose only goal is: keep CodexBar pleasant to look at for the local user, especially by Chinese-localizing the main menu/home UI, while staying easy to rebase on top of upstream `steipete/codexbar`.
 
 ## Operating intent
 
@@ -41,7 +41,7 @@ Covered areas:
 - Main menu card labels like `Session`, `Weekly`, `Designs`, `Daily Routines`
 - Percent/status wording like `used`, `left`, `Updated`, `Resets`, countdown/reset phrasing
 - Pace/risk phrasing
-- Bottom menu items like `Refresh`, `Settings...`, `About CodexBarCN`, `Quit`
+- Bottom menu items like `Refresh`, `Settings...`, `About CodexBar`, `Quit`
 - Simple plan-name display normalization
 - Minimal menu/account label localization like `Account`, `Plan`, `Quota`
 
@@ -124,7 +124,7 @@ Official installed app observed on this machine:
 
 Local built test app in this repo:
 
-- `/Users/eli/Dev/codexbar/CodexBarCN.app`
+- `/Users/eli/Dev/codexbar/CodexBar.app`
 - debug bundle id when built with debug packaging: `com.steipete.codexbar.debug`
 
 App-group/container separation:
@@ -237,7 +237,7 @@ Build verification hierarchy on this machine:
 Runtime verification command:
 
 ```bash
-ps -axo pid,args | rg '(/Applications/CodexBar.app|/Users/eli/Dev/codexbar/CodexBarCN.app)/Contents/MacOS/CodexBar'
+ps -axo pid,args | rg '(/Applications/CodexBar.app|/Users/eli/Dev/codexbar/CodexBar.app)/Contents/MacOS/CodexBar'
 ```
 
 Desired post-test state for this user:
