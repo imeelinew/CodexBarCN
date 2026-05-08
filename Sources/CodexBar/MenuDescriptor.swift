@@ -293,7 +293,7 @@ struct MenuDescriptor {
                     .secondary))
             }
             for detail in kiloLogin.details {
-                entries.append(.text("Activity: \(detail)", .secondary))
+                entries.append(.text("\(PrototypeChineseLocalization.text("Activity: "))\(detail)", .secondary))
             }
         } else if let loginMethodText, !loginMethodText.isEmpty {
             entries.append(.text(

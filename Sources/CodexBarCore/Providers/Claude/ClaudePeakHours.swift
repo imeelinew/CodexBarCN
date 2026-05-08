@@ -19,7 +19,7 @@ public enum ClaudePeakHours: Sendable {
               let minute = components.minute,
               let weekday = components.weekday
         else {
-            return Status(isPeak: false, label: "Off-peak")
+            return Status(isPeak: false, label: PrototypeChineseLocalization.text("Off-peak"))
         }
 
         let isWeekday = weekday >= 2 && weekday <= 6
@@ -32,7 +32,7 @@ public enum ClaudePeakHours: Sendable {
             let remaining = peakEndMinutes - nowMinutes
             return Status(
                 isPeak: true,
-                label: "Peak · ends in \(self.formatDuration(minutes: remaining))")
+                label: "\(PrototypeChineseLocalization.text("Peak")) · \(PrototypeChineseLocalization.text("ends in")) \(self.formatDuration(minutes: remaining))")
         }
 
         let nextPeak = self.nextPeakStart(after: date, calendar: calendar)
@@ -40,7 +40,7 @@ public enum ClaudePeakHours: Sendable {
         let minutes = max(Int(seconds / 60), 0)
         return Status(
             isPeak: false,
-            label: "Off-peak · peak in \(self.formatDuration(minutes: minutes))")
+            label: "\(PrototypeChineseLocalization.text("Off-peak")) · \(PrototypeChineseLocalization.text("peak in")) \(self.formatDuration(minutes: minutes))")
     }
 
     private static func nextPeakStart(after date: Date, calendar: Calendar) -> Date {

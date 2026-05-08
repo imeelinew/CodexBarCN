@@ -469,9 +469,9 @@ extension StatusItemController {
             activeProviders: enabledProviders,
             maxVisibleProviders: Self.maxOverviewProviders)
         let message = if resolvedProviders.isEmpty {
-            "No providers selected for Overview."
+            PrototypeChineseLocalization.text("No providers selected for Overview.")
         } else {
-            "No overview data available."
+            PrototypeChineseLocalization.text("No overview data available.")
         }
         let item = NSMenuItem(title: message, action: nil, keyEquivalent: "")
         item.isEnabled = false
@@ -1343,7 +1343,7 @@ extension StatusItemController {
     }
 
     private func makeBuyCreditsItem() -> NSMenuItem {
-        let item = NSMenuItem(title: "Buy Credits...", action: #selector(self.openCreditsPurchase), keyEquivalent: "")
+        let item = NSMenuItem(title: PrototypeChineseLocalization.text("Buy Credits..."), action: #selector(self.openCreditsPurchase), keyEquivalent: "")
         item.target = self
         if let image = NSImage(systemSymbolName: "plus.circle", accessibilityDescription: nil) {
             image.isTemplate = true
@@ -1356,7 +1356,7 @@ extension StatusItemController {
     @discardableResult
     private func addCreditsHistorySubmenu(to menu: NSMenu) -> Bool {
         guard let submenu = self.makeCreditsHistorySubmenu() else { return false }
-        let item = NSMenuItem(title: "Credits history", action: nil, keyEquivalent: "")
+        let item = NSMenuItem(title: PrototypeChineseLocalization.text("Credits history"), action: nil, keyEquivalent: "")
         item.isEnabled = true
         item.submenu = submenu
         menu.addItem(item)
@@ -1366,7 +1366,7 @@ extension StatusItemController {
     @discardableResult
     private func addUsageBreakdownSubmenu(to menu: NSMenu) -> Bool {
         guard let submenu = self.makeUsageBreakdownSubmenu() else { return false }
-        let item = NSMenuItem(title: "Usage breakdown", action: nil, keyEquivalent: "")
+        let item = NSMenuItem(title: PrototypeChineseLocalization.text("Usage breakdown"), action: nil, keyEquivalent: "")
         item.isEnabled = true
         item.submenu = submenu
         menu.addItem(item)
@@ -1376,7 +1376,7 @@ extension StatusItemController {
     @discardableResult
     private func addCostHistorySubmenu(to menu: NSMenu, provider: UsageProvider) -> Bool {
         guard let submenu = self.makeCostHistorySubmenu(provider: provider) else { return false }
-        let item = NSMenuItem(title: "Usage history (30 days)", action: nil, keyEquivalent: "")
+        let item = NSMenuItem(title: PrototypeChineseLocalization.text("Usage history (30 days)"), action: nil, keyEquivalent: "")
         item.isEnabled = true
         item.submenu = submenu
         menu.addItem(item)
@@ -1403,12 +1403,12 @@ extension StatusItemController {
 
         let submenu = NSMenu()
         submenu.delegate = self
-        let titleItem = NSMenuItem(title: "MCP details", action: nil, keyEquivalent: "")
+        let titleItem = NSMenuItem(title: PrototypeChineseLocalization.text("MCP details"), action: nil, keyEquivalent: "")
         titleItem.isEnabled = false
         submenu.addItem(titleItem)
 
         if let window = timeLimit.windowLabel {
-            let item = NSMenuItem(title: "Window: \(window)", action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: "\(PrototypeChineseLocalization.text("Window: "))\(window)", action: nil, keyEquivalent: "")
             item.isEnabled = false
             submenu.addItem(item)
         }
@@ -1416,7 +1416,7 @@ extension StatusItemController {
             let reset = self.settings.resetTimeDisplayStyle == .absolute
                 ? UsageFormatter.resetDescription(from: resetTime)
                 : UsageFormatter.resetCountdownDescription(from: resetTime)
-            let item = NSMenuItem(title: "Resets: \(reset)", action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: "\(PrototypeChineseLocalization.text("Resets: "))\(reset)", action: nil, keyEquivalent: "")
             item.isEnabled = false
             submenu.addItem(item)
         }

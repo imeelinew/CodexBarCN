@@ -161,7 +161,7 @@ struct MenuDescriptorKiloTests {
                 return text
             }
 
-        #expect(textLines.contains("Activity: Auto top-up: off"))
+        #expect(textLines.contains("活动：Auto top-up: off"))
         #expect(!textLines.contains("Plan: Auto top-up: off"))
     }
 }

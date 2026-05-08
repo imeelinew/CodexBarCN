@@ -48,7 +48,7 @@ struct UsagePaceTextTests {
 
         let summary = UsagePaceText.weeklySummary(pace: pace, now: now)
 
-        #expect(summary == "Pace: 超支 7% · 预计 3天后 后耗尽")
+        #expect(summary == "进度：超支 7% · 预计 3天后 后耗尽")
     }
 
     @Test

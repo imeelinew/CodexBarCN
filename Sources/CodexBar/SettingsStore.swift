@@ -28,12 +28,12 @@ enum RefreshFrequency: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .manual: "Manual"
-        case .oneMinute: "1 min"
-        case .twoMinutes: "2 min"
-        case .fiveMinutes: "5 min"
-        case .fifteenMinutes: "15 min"
-        case .thirtyMinutes: "30 min"
+        case .manual: PrototypeChineseLocalization.text("Manual")
+        case .oneMinute: PrototypeChineseLocalization.text("1 min")
+        case .twoMinutes: PrototypeChineseLocalization.text("2 min")
+        case .fiveMinutes: PrototypeChineseLocalization.text("5 min")
+        case .fifteenMinutes: PrototypeChineseLocalization.text("15 min")
+        case .thirtyMinutes: PrototypeChineseLocalization.text("30 min")
         }
     }
 }

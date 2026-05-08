@@ -247,7 +247,7 @@ private func makeUpdaterController() -> UpdaterProviding {
 
     if InstallOrigin.isHomebrewCask(appBundleURL: bundleURL) {
         return DisabledUpdaterController(
-            unavailableReason: "Updates managed by Homebrew. Run: brew upgrade --cask steipete/tap/codexbar")
+            unavailableReason: PrototypeChineseLocalization.text("Updates managed by Homebrew. Run: brew upgrade --cask steipete/tap/codexbar"))
     }
 
     guard isDeveloperIDSigned(bundleURL: bundleURL) else {

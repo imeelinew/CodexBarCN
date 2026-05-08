@@ -11,10 +11,11 @@ enum UsagePaceText {
 
     static func weeklySummary(pace: UsagePace, now: Date = .init()) -> String {
         let detail = self.weeklyDetail(pace: pace, now: now)
+        let pacePrefix = PrototypeChineseLocalization.text("Pace: ")
         if let rightLabel = detail.rightLabel {
-            return "Pace: \(detail.leftLabel) · \(rightLabel)"
+            return "\(pacePrefix)\(detail.leftLabel) · \(rightLabel)"
         }
-        return "Pace: \(detail.leftLabel)"
+        return "\(pacePrefix)\(detail.leftLabel)"
     }
 
     static func weeklyDetail(pace: UsagePace, now: Date = .init()) -> WeeklyDetail {

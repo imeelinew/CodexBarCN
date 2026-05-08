@@ -96,7 +96,7 @@ struct MenuCardOptionalUsageModelTests {
             now: now))
 
         #expect(model.usageNotes.count == 1)
-        #expect(model.usageNotes.first?.contains("Peak") == true)
+        #expect(model.usageNotes.first?.contains("高峰期") == true)
     }
 
     @Test
