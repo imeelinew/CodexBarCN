@@ -82,6 +82,10 @@ struct AdvancedPane: View {
                         subtitle: PrototypeChineseLocalization.text(
                             "Obscure email addresses in the menu bar and menu UI."),
                         binding: self.$settings.hidePersonalInfo)
+                    PreferenceToggleRow(
+                        title: "Show provider storage usage",
+                        subtitle: "Show local disk usage in menus. Scans known provider-owned paths in the background.",
+                        binding: self.$settings.providerStorageFootprintsEnabled)
                 }
 
                 Divider()
