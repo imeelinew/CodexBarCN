@@ -45,7 +45,7 @@ struct StatusMenuPersistentRefreshTests {
         let menu = controller.makeMenu(for: .codex)
         controller.menuWillOpen(menu)
 
-        let refreshItem = try #require(menu.items.first { $0.title == "Refresh" })
+        let refreshItem = try #require(menu.items.first { $0.title == "刷新" })
         #expect(refreshItem.action == nil)
         #expect(refreshItem.target == nil)
         #expect(refreshItem.view != nil)

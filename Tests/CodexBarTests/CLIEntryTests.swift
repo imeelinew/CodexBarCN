@@ -119,7 +119,7 @@ struct CLIEntryTests {
         let text = CodexBarCLI.renderOpenAIWebDashboardText(snapshot)
 
         #expect(text.contains("Web session: user@example.com"))
-        #expect(text.contains("Code review: 45% remaining (Resets in "))
+        #expect(text.contains("Code review: 45% remaining (1小时后重置"))
         #expect(text.contains("Web history: 1 events"))
     }
 

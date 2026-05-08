@@ -75,7 +75,7 @@ struct MenuCardModelTests {
         #expect(model.metrics.count == 2)
         #expect(model.metrics.first?.percent == 78)
         #expect(model.planText == "Plus")
-        #expect(model.subtitleText.hasPrefix("Updated"))
+        #expect(model.subtitleText.hasPrefix("刚刚更新"))
         #expect(model.progressColor != Color.clear)
         #expect(model.metrics[1].resetText?.isEmpty == false)
     }
@@ -369,7 +369,7 @@ struct MenuCardModelTests {
         let popupTitle = UsageMenuCardView.popupMetricTitle(
             provider: .openrouter,
             metric: metric)
-        #expect(popupTitle == "API key limit")
+        #expect(popupTitle == "API Key 限额")
         #expect(metric.resetText == "$19.50/$20.00 left")
         #expect(metric.detailRightText == nil)
     }
@@ -819,6 +819,6 @@ struct MenuCardModelTests {
 
         let primary = try #require(model.metrics.first)
         #expect(primary.detailText == "€1.2345 this month")
-        #expect(primary.resetText?.hasPrefix("Resets") == true)
+        #expect(primary.resetText?.hasSuffix("重置") == true)
     }
 }

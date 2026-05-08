@@ -43,7 +43,7 @@ struct CodexPresentationCharacterizationTests {
 
         let lines = self.textLines(from: descriptor)
         #expect(!lines.contains(where: { $0.hasPrefix("Session:") }))
-        #expect(lines.contains(where: { $0.hasPrefix("Weekly:") }))
+        #expect(lines.contains(where: { $0.hasPrefix("每周：") }))
     }
 
     @Test
@@ -89,10 +89,10 @@ struct CodexPresentationCharacterizationTests {
             includeContextualActions: false)
 
         let lines = self.textLines(from: descriptor)
-        #expect(lines.contains("Account: codex@example.com"))
-        #expect(lines.contains("Plan: Free"))
-        #expect(!lines.contains("Account: claude@example.com"))
-        #expect(!lines.contains("Plan: Max"))
+        #expect(lines.contains("账号：codex@example.com"))
+        #expect(lines.contains("套餐：免费版"))
+        #expect(!lines.contains("账号：claude@example.com"))
+        #expect(!lines.contains("套餐：Max"))
     }
 
     @Test
@@ -127,8 +127,8 @@ struct CodexPresentationCharacterizationTests {
             includeContextualActions: false)
 
         let lines = self.textLines(from: descriptor)
-        #expect(lines.contains("Plan: Pro Lite"))
-        #expect(!lines.contains("Plan: Prolite"))
+        #expect(lines.contains("套餐：Pro Lite"))
+        #expect(!lines.contains("套餐：Prolite"))
     }
 
     @Test
@@ -185,10 +185,10 @@ struct CodexPresentationCharacterizationTests {
             includeContextualActions: false)
 
         let lines = self.textLines(from: descriptor)
-        #expect(lines.contains("Account: snapshot@example.com"))
-        #expect(lines.contains("Plan: Enterprise"))
-        #expect(!lines.contains("Account: fallback@example.com"))
-        #expect(!lines.contains("Plan: Plus"))
+        #expect(lines.contains("账号：snapshot@example.com"))
+        #expect(lines.contains("套餐：企业版"))
+        #expect(!lines.contains("账号：fallback@example.com"))
+        #expect(!lines.contains("套餐：Plus"))
     }
 
     @Test
@@ -241,9 +241,9 @@ struct CodexPresentationCharacterizationTests {
             includeContextualActions: false)
 
         let lines = self.textLines(from: descriptor)
-        #expect(lines.contains("Account: snapshot@example.com"))
-        #expect(lines.contains("Plan: Plus"))
-        #expect(!lines.contains("Account: fallback@example.com"))
+        #expect(lines.contains("账号：snapshot@example.com"))
+        #expect(lines.contains("套餐：Plus"))
+        #expect(!lines.contains("账号：fallback@example.com"))
     }
 
     @Test
@@ -427,9 +427,9 @@ struct CodexPresentationCharacterizationTests {
             includeContextualActions: false)
 
         let lines = self.textLines(from: descriptor)
-        #expect(lines.contains(where: { $0.hasPrefix("Tokens:") }))
-        #expect(lines.contains(where: { $0.hasPrefix("MCP:") }))
-        #expect(lines.contains(where: { $0.hasPrefix("5-hour:") }))
+        #expect(lines.contains(where: { $0.hasPrefix("Tokens：") }))
+        #expect(lines.contains(where: { $0.hasPrefix("MCP：") }))
+        #expect(lines.contains(where: { $0.hasPrefix("5-hour：") }))
     }
 
     private func makeSettingsStore(suite: String) -> SettingsStore {

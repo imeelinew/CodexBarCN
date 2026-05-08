@@ -252,7 +252,7 @@ struct ProvidersPaneCoverageTests {
         let model = pane._test_menuCardModel(for: .codex)
 
         #expect(model.email == "managed@example.com")
-        #expect(model.planText == "Enterprise")
+        #expect(model.planText == "企业版")
     }
 
     private static func makeSettingsStore(suite: String) -> SettingsStore {

@@ -35,8 +35,8 @@ struct CLISnapshotTests {
         #expect(output.contains("Codex 1.2.3 (codex-cli)"))
         #expect(output.contains("Status: Partial outage – Degraded performance"))
         #expect(output.contains("Codex"))
-        #expect(output.contains("Session: 88% left"))
-        #expect(output.contains("Weekly: 75% left"))
+        #expect(output.contains("Session: 88% 剩余"))
+        #expect(output.contains("Weekly: 75% 剩余"))
         #expect(output.contains("Credits: 42"))
         #expect(output.contains("Account: user@example.com"))
         #expect(output.contains("Plan: Pro"))
@@ -88,7 +88,7 @@ struct CLISnapshotTests {
                 useColor: false,
                 resetStyle: .absolute))
 
-        #expect(output.contains("Session: 98% left"))
+        #expect(output.contains("Session: 98% 剩余"))
         #expect(!output.contains("Weekly:"))
     }
 
@@ -116,7 +116,7 @@ struct CLISnapshotTests {
                 useColor: false,
                 resetStyle: .absolute))
 
-        #expect(output.contains("\(meta.sessionLabel): 100% left"))
+        #expect(output.contains("\(meta.sessionLabel): 100% 剩余"))
         #expect(!output.contains("Resets Unlimited"))
         #expect(output.contains("Unlimited"))
     }
@@ -150,8 +150,8 @@ struct CLISnapshotTests {
                 useColor: false,
                 resetStyle: .absolute))
 
-        #expect(output.contains("\(meta.sessionLabel): 90% left"))
-        #expect(output.contains("Resets"))
+        #expect(output.contains("\(meta.sessionLabel): 90% 剩余"))
+        #expect(output.contains("重置"))
         #expect(output.contains("10/100 credits"))
         #expect(!output.contains("Resets 10/100 credits"))
     }
@@ -182,7 +182,7 @@ struct CLISnapshotTests {
                 resetStyle: .absolute,
                 notes: ["Using CLI fallback"]))
 
-        #expect(output.contains("Credits: 60% left"))
+        #expect(output.contains("Credits: 60% 剩余"))
         #expect(output.contains("40/100 credits"))
         #expect(!output.contains("Resets 40/100 credits"))
         #expect(output.contains("Plan: Kilo Pass Pro"))
@@ -212,7 +212,7 @@ struct CLISnapshotTests {
                 useColor: false,
                 resetStyle: .absolute))
 
-        #expect(output.contains("Credits: 0% left"))
+        #expect(output.contains("Credits: 0% 剩余"))
         #expect(output.contains("0/0 credits"))
         #expect(!output.contains("Resets 0/0 credits"))
     }
@@ -418,8 +418,8 @@ struct CLISnapshotTests {
                 resetStyle: .absolute))
 
         #expect(output.contains("\u{001B}[1;95m== Codex 0.0.0 (codex-cli) ==\u{001B}[0m"))
-        #expect(output.contains("Session: \u{001B}[31m5% left\u{001B}[0m")) // red <10% left
-        #expect(output.contains("Weekly: \u{001B}[33m20% left\u{001B}[0m")) // yellow <25% left
+        #expect(output.contains("Session: \u{001B}[31m5% 剩余\u{001B}[0m")) // red <10% left
+        #expect(output.contains("Weekly: \u{001B}[33m20% 剩余\u{001B}[0m")) // yellow <25% left
     }
 
     @Test

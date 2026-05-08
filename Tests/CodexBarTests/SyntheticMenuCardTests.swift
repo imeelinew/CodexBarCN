@@ -57,8 +57,8 @@ struct SyntheticMenuCardTests {
         let model = try Self.makeModel(primary: primary, now: now)
         let metric = try #require(model.metrics.first)
         // 50% used / 2% per tick = 25 ticks to full.
-        #expect(metric.detailRightText == "Full in ~25 regens")
-        #expect(metric.detailLeftText == "52% after next regen")
+        #expect(metric.detailRightText == "约 25 次再生即满")
+        #expect(metric.detailLeftText == "52% 下次再生后")
     }
 
     @Test
@@ -100,8 +100,8 @@ struct SyntheticMenuCardTests {
             now: now)
         let weekly = try #require(model.metrics.first(where: { $0.id == "secondary" }))
         // used=$0.36 / nextRegen=$0.72 = 0.5 ticks → between 0.1 and 1.5 → "Full in ~1 regen".
-        #expect(weekly.detailRightText == "Full in ~1 regen")
-        // remaining 99% + 2% next regen caps at 100% → "100% after next regen".
-        #expect(weekly.detailLeftText == "100% after next regen")
+        #expect(weekly.detailRightText == "约 1 次再生即满")
+        // remaining 99% + 2% next regen caps at 100% → "100% 下次再生后".
+        #expect(weekly.detailLeftText == "100% 下次再生后")
     }
 }

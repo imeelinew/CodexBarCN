@@ -787,22 +787,22 @@ struct StatusMenuTests {
         #expect(!titles.contains("Switch Account..."))
         #expect(!titles.contains("Usage Dashboard"))
         #expect(!titles.contains("Status Page"))
-        #expect(titles.contains("Refresh"))
-        #expect(titles.contains("Settings..."))
-        #expect(titles.contains("About CodexBar"))
-        #expect(titles.contains("Quit"))
+        #expect(titles.contains("刷新"))
+        #expect(titles.contains("设置..."))
+        #expect(titles.contains("关于 CodexBar"))
+        #expect(titles.contains("退出"))
 
-        let refreshItem = menu.items.first { $0.title == "Refresh" }
+        let refreshItem = menu.items.first { $0.title == "刷新" }
         #expect(refreshItem != nil)
         #expect(refreshItem?.keyEquivalent == "r")
         #expect(refreshItem?.keyEquivalentModifierMask == [.command])
 
-        let settingsItem = menu.items.first { $0.title == "Settings..." }
+        let settingsItem = menu.items.first { $0.title == "设置..." }
         #expect(settingsItem != nil)
         #expect(settingsItem?.keyEquivalent == ",")
         #expect(settingsItem?.keyEquivalentModifierMask == [.command])
 
-        let quitItem = menu.items.first { $0.title == "Quit" }
+        let quitItem = menu.items.first { $0.title == "退出" }
         #expect(quitItem != nil)
         #expect(quitItem?.keyEquivalent == "q")
         #expect(quitItem?.keyEquivalentModifierMask == [.command])

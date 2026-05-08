@@ -31,7 +31,7 @@ struct CodexPlanFormattingTests {
 
     @Test
     func `preserves already readable plan text`() {
-        #expect(CodexPlanFormatting.displayName("Enterprise") == "Enterprise")
+        #expect(CodexPlanFormatting.displayName("Enterprise") == "企业版")
         #expect(CodexPlanFormatting.displayName("Pro Lite") == "Pro Lite")
     }
 }

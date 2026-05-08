@@ -109,7 +109,7 @@ struct MenuDescriptorKiloTests {
             return text
         }
 
-        #expect(textLines.contains(where: { $0.contains("Resets") }))
+        #expect(textLines.contains(where: { $0.contains("重置") }))
         #expect(textLines.contains("$0.00 / $19.00 (+ $9.50 bonus)"))
     }
 
