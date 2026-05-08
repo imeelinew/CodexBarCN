@@ -242,7 +242,7 @@ private func makeUpdaterController() -> UpdaterProviding {
     let bundleURL = Bundle.main.bundleURL
     let isBundledApp = bundleURL.pathExtension == "app"
     guard isBundledApp else {
-        return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
+        return DisabledUpdaterController(unavailableReason: PrototypeChineseLocalization.text("Updates unavailable in this build."))
     }
 
     if InstallOrigin.isHomebrewCask(appBundleURL: bundleURL) {
@@ -251,7 +251,7 @@ private func makeUpdaterController() -> UpdaterProviding {
     }
 
     guard isDeveloperIDSigned(bundleURL: bundleURL) else {
-        return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
+        return DisabledUpdaterController(unavailableReason: PrototypeChineseLocalization.text("Updates unavailable in this build."))
     }
 
     let defaults = UserDefaults.standard

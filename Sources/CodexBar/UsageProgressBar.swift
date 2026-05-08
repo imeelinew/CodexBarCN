@@ -1,3 +1,4 @@
+import CodexBarCore
 import SwiftUI
 
 /// Static progress fill with no implicit animations, used inside the menu card.
@@ -98,7 +99,7 @@ struct UsageProgressBar: View {
         }
         .frame(height: 6)
         .accessibilityLabel(self.accessibilityLabel)
-        .accessibilityValue("\(Int(self.clamped)) percent")
+        .accessibilityValue("\(Int(self.clamped)) \(PrototypeChineseLocalization.text("percent"))")
     }
 
     private static func paceStripePaths(size: CGSize, scale: CGFloat) -> (punched: Path, center: Path) {

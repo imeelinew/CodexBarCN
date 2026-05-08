@@ -1315,7 +1315,7 @@ extension StatusMenuTests {
 
         controller.hydrateHostedSubviewMenuIfNeeded(submenu)
         #expect(submenu.items.count == 1)
-        #expect(submenu.items.first?.title == "No data available")
+        #expect(submenu.items.first?.title == "暂无数据")
         #expect(submenu.items.first?.toolTip == UsageProvider.codex.rawValue)
 
         store._setTokenSnapshotForTesting(CostUsageTokenSnapshot(

@@ -125,9 +125,9 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
         }
         guard self.settings.hasUnreadableManagedCodexAccountStore == false else {
             self.presentLoginAlert(
-                title: "Managed Codex accounts unavailable",
-                message: "CodexBar could not read managed account storage. " +
-                    "Recover the store before adding another account.")
+                title: PrototypeChineseLocalization.text("Managed Codex accounts unavailable"),
+                message: PrototypeChineseLocalization.text("CodexBar could not read managed account storage. ") +
+                    PrototypeChineseLocalization.text("Recover the store before adding another account."))
             return
         }
 
@@ -312,23 +312,23 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
            error == .authenticationInProgress
         {
             info = LoginAlertInfo(
-                title: "Codex account login already running",
-                message: "Wait for the current managed Codex login to finish before adding another account.")
+                title: PrototypeChineseLocalization.text("Codex account login already running"),
+                message: PrototypeChineseLocalization.text("Wait for the current managed Codex login to finish before adding another account."))
         } else if let error = error as? ManagedCodexAccountServiceError {
             let message = switch error {
             case .loginFailed:
-                "Managed Codex login did not complete. Try again after finishing the browser login flow."
+                PrototypeChineseLocalization.text("Managed Codex login did not complete. Try again after finishing the browser login flow.")
             case .missingEmail:
-                "Codex login completed, but no account email was available. " +
-                    "Try again after confirming the account is fully signed in."
+                PrototypeChineseLocalization.text("Codex login completed, but no account email was available. ") +
+                    PrototypeChineseLocalization.text("Try again after confirming the account is fully signed in.")
             case .workspaceSelectionCancelled:
-                "CodexBar found multiple workspaces, but no workspace was selected."
+                PrototypeChineseLocalization.text("CodexBar found multiple workspaces, but no workspace was selected.")
             case let .unsafeManagedHome(path):
-                "CodexBar refused to modify an unexpected managed home path: \(path)"
+                String(format: PrototypeChineseLocalization.text("CodexBar refused to modify an unexpected managed home path: %@"), path)
             }
-            info = LoginAlertInfo(title: "Could not add Codex account", message: message)
+            info = LoginAlertInfo(title: PrototypeChineseLocalization.text("Could not add Codex account"), message: message)
         } else {
-            info = LoginAlertInfo(title: "Could not add Codex account", message: error.localizedDescription)
+            info = LoginAlertInfo(title: PrototypeChineseLocalization.text("Could not add Codex account"), message: error.localizedDescription)
         }
 
         self.presentLoginAlert(title: info.title, message: info.message)
@@ -340,18 +340,18 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
             return
         case .missingBinary:
             self.presentLoginAlert(
-                title: "Claude CLI not found",
-                message: "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again.")
+                title: PrototypeChineseLocalization.text("Claude CLI not found"),
+                message: PrototypeChineseLocalization.text("Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again."))
         case let .launchFailed(message):
-            self.presentLoginAlert(title: "Could not start claude /login", message: message)
+            self.presentLoginAlert(title: PrototypeChineseLocalization.text("Could not start claude /login"), message: message)
         case .timedOut:
             self.presentLoginAlert(
-                title: "Claude login timed out",
+                title: PrototypeChineseLocalization.text("Claude login timed out"),
                 message: self.trimmedLoginOutput(result.output))
         case let .failed(status):
-            let statusLine = "claude /login exited with status \(status)."
+            let statusLine = PrototypeChineseLocalization.text("claude /login exited with status \(status).")
             let message = self.trimmedLoginOutput(result.output.isEmpty ? statusLine : result.output)
-            self.presentLoginAlert(title: "Claude login failed", message: message)
+            self.presentLoginAlert(title: PrototypeChineseLocalization.text("Claude login failed"), message: message)
         }
     }
 
@@ -399,10 +399,10 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
             nil
         case .missingBinary:
             LoginAlertInfo(
-                title: "Gemini CLI not found",
-                message: "Install the Gemini CLI (npm i -g @google/gemini-cli) and try again.")
+                title: PrototypeChineseLocalization.text("Gemini CLI not found"),
+                message: PrototypeChineseLocalization.text("Install the Gemini CLI (npm i -g @google/gemini-cli) and try again."))
         case let .launchFailed(message):
-            LoginAlertInfo(title: "Could not open Terminal for Gemini", message: message)
+            LoginAlertInfo(title: PrototypeChineseLocalization.text("Could not open Terminal for Gemini"), message: message)
         }
     }
 
@@ -417,7 +417,7 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
     private func trimmedLoginOutput(_ text: String) -> String {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         let limit = 600
-        if trimmed.isEmpty { return "No output captured." }
+        if trimmed.isEmpty { return PrototypeChineseLocalization.text("No output captured.") }
         if trimmed.count <= limit { return trimmed }
         let idx = trimmed.index(trimmed.startIndex, offsetBy: limit)
         return "\(trimmed[..<idx])…"
@@ -425,8 +425,8 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
 
     func postLoginNotification(for provider: UsageProvider) {
         let name = ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName
-        let title = "\(name) login successful"
-        let body = "You can return to the app; authentication finished."
+        let title = String(format: PrototypeChineseLocalization.text("%@ login successful"), name)
+        let body = PrototypeChineseLocalization.text("You can return to the app; authentication finished.")
         AppNotifications.shared.post(idPrefix: "login-\(provider.rawValue)", title: title, body: body)
     }
 
@@ -438,7 +438,7 @@ extension StatusItemController: StatusItemMenuPersistentActionDelegate {
             // User closed the window; no alert needed
             return
         case let .failed(message):
-            self.presentLoginAlert(title: "Cursor login failed", message: message)
+            self.presentLoginAlert(title: PrototypeChineseLocalization.text("Cursor login failed"), message: message)
         }
     }
 

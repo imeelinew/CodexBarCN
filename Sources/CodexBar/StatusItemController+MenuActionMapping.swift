@@ -1,4 +1,5 @@
 import AppKit
+import CodexBarCore
 
 extension StatusItemController {
     func selector(for action: MenuDescriptor.MenuAction) -> (Selector, Any?) {
@@ -24,9 +25,9 @@ extension StatusItemController {
 
     func codexAddAccountSubtitle() -> String? {
         if self.settings.hasUnreadableManagedCodexAccountStore {
-            return "Managed account storage unavailable"
+            return PrototypeChineseLocalization.text("Managed account storage unavailable")
         }
         guard self.managedCodexAccountCoordinator.isAuthenticatingManagedAccount else { return nil }
-        return "Managed Codex login in progress…"
+        return PrototypeChineseLocalization.text("Managed Codex login in progress…")
     }
 }

@@ -52,7 +52,7 @@ struct CodexAccountsSectionState: Equatable {
     }
 
     var systemDisplayName: String {
-        self.systemVisibleAccount?.displayName ?? "No system account"
+        self.systemVisibleAccount?.displayName ?? PrototypeChineseLocalization.text("No system account")
     }
 
     var canAddAccount: Bool {
@@ -65,9 +65,9 @@ struct CodexAccountsSectionState: Equatable {
 
     var addAccountTitle: String {
         if self.isAuthenticatingManagedAccount, self.authenticatingManagedAccountID == nil {
-            return "Adding Account…"
+            return PrototypeChineseLocalization.text("Adding Account…")
         }
-        return "Add Account"
+        return PrototypeChineseLocalization.text("Add Account")
     }
 
     func showsLiveBadge(for account: CodexVisibleAccount) -> Bool {
@@ -114,12 +114,12 @@ struct CodexAccountsSectionState: Equatable {
            self.isAuthenticatingManagedAccount,
            self.authenticatingManagedAccountID == accountID
         {
-            return "Re-authenticating…"
+            return PrototypeChineseLocalization.text("Re-authenticating…")
         }
         if account.storedAccountID == nil, self.isAuthenticatingLiveAccount {
-            return "Re-authenticating…"
+            return PrototypeChineseLocalization.text("Re-authenticating…")
         }
-        return "Re-auth"
+        return PrototypeChineseLocalization.text("Re-auth")
     }
 }
 

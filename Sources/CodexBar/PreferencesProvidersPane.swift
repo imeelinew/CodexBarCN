@@ -176,9 +176,9 @@ struct ProvidersPane: View {
             let relative = snapshot.updatedAt.relativeDescription()
             usageText = relative
         } else if self.store.isStale(provider: provider) {
-            usageText = "last fetch failed"
+            usageText = PrototypeChineseLocalization.text("last fetch failed")
         } else {
-            usageText = "usage not fetched yet"
+            usageText = PrototypeChineseLocalization.text("usage not fetched yet")
         }
 
         let presentationContext = ProviderPresentationContext(
@@ -199,8 +199,8 @@ struct ProvidersPane: View {
         let projection = self.settings.codexVisibleAccountProjection
         let degradedNotice: CodexAccountsSectionNotice? = if projection.hasUnreadableAddedAccountStore {
             CodexAccountsSectionNotice(
-                text: "Managed account storage is unreadable. Live account access is still available, "
-                    + "but managed add, re-auth, and remove actions are disabled until the store is recoverable.",
+                text: PrototypeChineseLocalization.text("Managed account storage is unreadable. Live account access is still available, "
+                    + "but managed add, re-auth, and remove actions are disabled until the store is recoverable."),
                 tone: .warning)
         } else {
             nil
@@ -390,7 +390,7 @@ struct ProvidersPane: View {
                     }
                 }
             },
-            primaryAddActionTitle: provider == .copilot ? "Add Account" : nil,
+            primaryAddActionTitle: provider == .copilot ? PrototypeChineseLocalization.text("Add Account") : nil,
             primaryAddAction: provider == .copilot ? {
                 await CopilotLoginFlow.run(settings: self.settings)
                 await ProviderInteractionContext.$current.withValue(.userInitiated) {
@@ -454,22 +454,22 @@ struct ProvidersPane: View {
         let options: [ProviderSettingsPickerOption]
         if provider == .openrouter {
             options = [
-                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: "Automatic"),
+                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: PrototypeChineseLocalization.text("Automatic")),
                 ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.primary.rawValue,
-                    title: "Primary (API key limit)"),
+                    title: PrototypeChineseLocalization.text("Primary (API key limit)")),
             ]
         } else if provider == .deepseek {
             options = [
-                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: "Automatic"),
+                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: PrototypeChineseLocalization.text("Automatic")),
             ]
         } else if provider == .abacus {
             let metadata = self.store.metadata(for: provider)
             options = [
-                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: "Automatic"),
+                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: PrototypeChineseLocalization.text("Automatic")),
                 ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.primary.rawValue,
-                    title: "Primary (\(metadata.sessionLabel))"),
+                    title: PrototypeChineseLocalization.text("Primary (\(metadata.sessionLabel))")),
             ]
         } else {
             let metadata = self.store.metadata(for: provider)
@@ -478,38 +478,38 @@ struct ProvidersPane: View {
             let supportsTertiary = self.settings.menuBarMetricSupportsTertiary(for: provider, snapshot: snapshot)
             let supportsExtraUsage = self.settings.menuBarMetricSupportsExtraUsage(for: provider, snapshot: snapshot)
             var metricOptions: [ProviderSettingsPickerOption] = [
-                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: "Automatic"),
+                ProviderSettingsPickerOption(id: MenuBarMetricPreference.automatic.rawValue, title: PrototypeChineseLocalization.text("Automatic")),
                 ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.primary.rawValue,
-                    title: "Primary (\(metadata.sessionLabel))"),
+                    title: PrototypeChineseLocalization.text("Primary (\(metadata.sessionLabel))")),
                 ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.secondary.rawValue,
-                    title: "Secondary (\(metadata.weeklyLabel))"),
+                    title: PrototypeChineseLocalization.text("Secondary (\(metadata.weeklyLabel))")),
             ]
             if supportsTertiary {
                 let tertiaryTitle = metadata.opusLabel ?? MenuBarMetricPreference.tertiary.label
                 metricOptions.append(ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.tertiary.rawValue,
-                    title: "Tertiary (\(tertiaryTitle))"))
+                    title: PrototypeChineseLocalization.text("Tertiary (\(tertiaryTitle))")))
             }
             if supportsExtraUsage {
                 metricOptions.append(ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.extraUsage.rawValue,
-                    title: MenuBarMetricPreference.extraUsage.label))
+                    title: PrototypeChineseLocalization.text(MenuBarMetricPreference.extraUsage.label)))
             }
             if supportsAverage {
                 metricOptions.append(ProviderSettingsPickerOption(
                     id: MenuBarMetricPreference.average.rawValue,
-                    title: "Average (\(metadata.sessionLabel) + \(metadata.weeklyLabel))"))
+                    title: PrototypeChineseLocalization.text("Average (\(metadata.sessionLabel) + \(metadata.weeklyLabel))")))
             }
             options = metricOptions
         }
         return ProviderSettingsPickerDescriptor(
             id: "menuBarMetric",
-            title: "Menu bar metric",
+            title: PrototypeChineseLocalization.text("Menu bar metric"),
             subtitle: provider == .deepseek
-                ? "Shows the DeepSeek balance in the menu bar."
-                : "Choose which window drives the menu bar percent.",
+                ? PrototypeChineseLocalization.text("Shows the DeepSeek balance in the menu bar.")
+                : PrototypeChineseLocalization.text("Choose which window drives the menu bar percent."),
             binding: Binding(
                 get: {
                     self.settings
@@ -613,22 +613,22 @@ struct ProvidersPane: View {
            error == .authenticationInProgress
         {
             return CodexAccountsSectionNotice(
-                text: "A managed Codex login is already running. Wait for it to finish before adding "
-                    + "or re-authenticating another account.",
+                text: PrototypeChineseLocalization.text("A managed Codex login is already running. Wait for it to finish before adding "
+                    + "or re-authenticating another account."),
                 tone: .warning)
         }
 
         if let error = error as? ManagedCodexAccountServiceError {
             let message = switch error {
             case .loginFailed:
-                "Managed Codex login did not complete. Try again after finishing the browser login flow."
+                PrototypeChineseLocalization.text("Managed Codex login did not complete. Try again after finishing the browser login flow.")
             case .missingEmail:
-                "Codex login completed, but no account email was available. Try again after confirming "
-                    + "the account is fully signed in."
+                PrototypeChineseLocalization.text("Codex login completed, but no account email was available. Try again after confirming "
+                    + "the account is fully signed in.")
             case .workspaceSelectionCancelled:
-                "CodexBar found multiple workspaces, but no workspace was selected."
+                PrototypeChineseLocalization.text("CodexBar found multiple workspaces, but no workspace was selected.")
             case let .unsafeManagedHome(path):
-                "CodexBar refused to modify an unexpected managed home path: \(path)"
+                PrototypeChineseLocalization.text("CodexBar refused to modify an unexpected managed home path: \(path)")
             }
             return CodexAccountsSectionNotice(text: message, tone: .warning)
         }

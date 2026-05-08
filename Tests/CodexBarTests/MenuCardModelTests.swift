@@ -370,7 +370,7 @@ struct MenuCardModelTests {
             provider: .openrouter,
             metric: metric)
         #expect(popupTitle == "API Key 限额")
-        #expect(metric.resetText == "$19.50/$20.00 left")
+        #expect(metric.resetText == "$19.50/$20.00 剩余")
         #expect(metric.detailRightText == nil)
     }
 
@@ -412,7 +412,7 @@ struct MenuCardModelTests {
         #expect(model.metrics.isEmpty)
         #expect(model.creditsText == nil)
         #expect(model.placeholder == nil)
-        #expect(model.usageNotes == ["No limit set for the API key"])
+        #expect(model.usageNotes == ["未为 API 密钥设置限额"])
     }
 
     @Test
@@ -451,7 +451,7 @@ struct MenuCardModelTests {
             now: now))
 
         #expect(model.metrics.isEmpty)
-        #expect(model.usageNotes == ["API key limit unavailable right now"])
+        #expect(model.usageNotes == ["API 密钥限额当前不可用"])
     }
 
     @Test
@@ -539,7 +539,7 @@ struct MenuCardModelTests {
 
         #expect(model.planText == "Kilo Pass Pro")
         #expect(model.usageNotes.contains("Auto top-up: visa"))
-        #expect(model.usageNotes.contains("Using CLI fallback"))
+        #expect(model.usageNotes.contains("使用 CLI 回退"))
     }
 
     @Test

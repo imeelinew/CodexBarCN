@@ -26,8 +26,8 @@ struct ProvidersPaneCoverageTests {
             MenuBarMetricPreference.primary.rawValue,
         ])
         #expect(picker?.options.map(\.title) == [
-            "Automatic",
-            "Primary (API key limit)",
+            "自动",
+            "主要（API 密钥限额）",
         ])
     }
 
@@ -41,7 +41,7 @@ struct ProvidersPaneCoverageTests {
         #expect(picker?.options.map(\.id) == [
             MenuBarMetricPreference.automatic.rawValue,
         ])
-        #expect(picker?.subtitle == "Shows the DeepSeek balance in the menu bar.")
+        #expect(picker?.subtitle == "在菜单栏中显示 DeepSeek 余额。")
     }
 
     @Test
@@ -114,7 +114,7 @@ struct ProvidersPaneCoverageTests {
         let ids = picker?.options.map(\.id) ?? []
         #expect(ids.contains(MenuBarMetricPreference.extraUsage.rawValue))
         let option = picker?.options.first { $0.id == MenuBarMetricPreference.extraUsage.rawValue }
-        #expect(option?.title == "Extra usage")
+        #expect(option?.title == "额外用量")
     }
 
     @Test
@@ -167,7 +167,7 @@ struct ProvidersPaneCoverageTests {
     func `provider detail plan row formats open router as balance`() {
         let row = ProviderDetailView<EmptyView>.planRow(provider: .openrouter, planText: "Balance: $4.61")
 
-        #expect(row?.label == "Balance")
+        #expect(row?.label == "余额")
         #expect(row?.value == "$4.61")
     }
 
@@ -175,7 +175,7 @@ struct ProvidersPaneCoverageTests {
     func `provider detail plan row keeps plan label for non open router`() {
         let row = ProviderDetailView<EmptyView>.planRow(provider: .codex, planText: "Pro")
 
-        #expect(row?.label == "Plan")
+        #expect(row?.label == "套餐")
         #expect(row?.value == "Pro")
     }
 

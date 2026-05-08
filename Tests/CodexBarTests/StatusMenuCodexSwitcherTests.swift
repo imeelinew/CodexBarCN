@@ -362,7 +362,7 @@ struct StatusMenuCodexSwitcherTests {
 
         #expect(state.canAddAccount == false)
         #expect(state.isAuthenticatingManagedAccount)
-        #expect(state.addAccountTitle == "Adding Account…")
+        #expect(state.addAccountTitle == "正在添加账号…")
 
         await runner.resume()
         _ = try await authTask.value

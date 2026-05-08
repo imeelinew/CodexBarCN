@@ -64,18 +64,19 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
             return nil
         }
         guard provider == .openrouter else {
-            return (label: "Plan", value: rawPlan)
+            return (label: PrototypeChineseLocalization.text("Plan"), value: rawPlan)
         }
 
-        let prefix = "Balance:"
-        if rawPlan.hasPrefix(prefix) {
-            let valueStart = rawPlan.index(rawPlan.startIndex, offsetBy: prefix.count)
-            let trimmedValue = rawPlan[valueStart...].trimmingCharacters(in: .whitespacesAndNewlines)
-            if !trimmedValue.isEmpty {
-                return (label: "Balance", value: trimmedValue)
-            }
+        let labelText = PrototypeChineseLocalization.text("Balance")
+        let enPrefix = "Balance" + ":"
+        let cnPrefix = labelText + ":"
+        let effectivePrefix = rawPlan.hasPrefix(enPrefix) ? enPrefix : cnPrefix
+        let valueStart = rawPlan.index(rawPlan.startIndex, offsetBy: effectivePrefix.count)
+        let trimmedValue = rawPlan[valueStart...].trimmingCharacters(in: .whitespacesAndNewlines)
+        if !trimmedValue.isEmpty {
+            return (label: labelText, value: String(trimmedValue))
         }
-        return (label: "Balance", value: rawPlan)
+        return (label: labelText, value: rawPlan)
     }
 
     var body: some View {
@@ -148,12 +149,17 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
     }
 
     private var detailLabelWidth: CGFloat {
-        var infoLabels = ["State", "Source", "Version", "Updated"]
+        var infoLabels = [
+            PrototypeChineseLocalization.text("State"),
+            PrototypeChineseLocalization.text("Source"),
+            PrototypeChineseLocalization.text("Version"),
+            PrototypeChineseLocalization.text("Updated"),
+        ]
         if self.store.status(for: self.provider) != nil {
-            infoLabels.append("Status")
+            infoLabels.append(PrototypeChineseLocalization.text("Status"))
         }
         if !self.model.email.isEmpty {
-            infoLabels.append("Account")
+            infoLabels.append(PrototypeChineseLocalization.text("Account"))
         }
         if let planRow = Self.planRow(provider: self.provider, planText: self.model.planText) {
             infoLabels.append(planRow.label)
@@ -163,13 +169,13 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
             Self.metricTitle(provider: self.provider, metric: metric)
         }
         if self.model.creditsText != nil {
-            metricLabels.append("Credits")
+            metricLabels.append(PrototypeChineseLocalization.text("Credits"))
         }
         if let providerCost = self.model.providerCost {
             metricLabels.append(providerCost.title)
         }
         if self.model.tokenUsage != nil {
-            metricLabels.append("Cost")
+            metricLabels.append(PrototypeChineseLocalization.text("Cost"))
         }
 
         let infoWidth = ProviderSettingsMetrics.labelWidth(
@@ -215,7 +221,7 @@ private struct ProviderDetailHeaderView: View {
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .help("Refresh")
+                .help(PrototypeChineseLocalization.text("Refresh"))
 
                 Toggle("", isOn: self.$isEnabled)
                     .labelsHidden()
@@ -275,26 +281,28 @@ private struct ProviderDetailInfoGrid: View {
     var body: some View {
         let status = self.store.status(for: self.provider)
         let source = self.store.sourceLabel(for: self.provider)
-        let version = self.store.version(for: self.provider) ?? "not detected"
+        let version = self.store.version(for: self.provider) ?? PrototypeChineseLocalization.text("not detected")
         let updated = self.updatedText
         let email = self.model.email
-        let enabledText = self.isEnabled ? "Enabled" : "Disabled"
+        let enabledText = self.isEnabled
+            ? PrototypeChineseLocalization.text("Enabled")
+            : PrototypeChineseLocalization.text("Disabled")
 
         Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 6) {
-            ProviderDetailInfoRow(label: "State", value: enabledText, labelWidth: self.labelWidth)
-            ProviderDetailInfoRow(label: "Source", value: source, labelWidth: self.labelWidth)
-            ProviderDetailInfoRow(label: "Version", value: version, labelWidth: self.labelWidth)
-            ProviderDetailInfoRow(label: "Updated", value: updated, labelWidth: self.labelWidth)
+            ProviderDetailInfoRow(label: PrototypeChineseLocalization.text("State"), value: enabledText, labelWidth: self.labelWidth)
+            ProviderDetailInfoRow(label: PrototypeChineseLocalization.text("Source"), value: source, labelWidth: self.labelWidth)
+            ProviderDetailInfoRow(label: PrototypeChineseLocalization.text("Version"), value: version, labelWidth: self.labelWidth)
+            ProviderDetailInfoRow(label: PrototypeChineseLocalization.text("Updated"), value: updated, labelWidth: self.labelWidth)
 
             if let status {
                 ProviderDetailInfoRow(
-                    label: "Status",
+                    label: PrototypeChineseLocalization.text("Status"),
                     value: status.description ?? status.indicator.label,
                     labelWidth: self.labelWidth)
             }
 
             if !email.isEmpty {
-                ProviderDetailInfoRow(label: "Account", value: email, labelWidth: self.labelWidth)
+                ProviderDetailInfoRow(label: PrototypeChineseLocalization.text("Account"), value: email, labelWidth: self.labelWidth)
             }
 
             if let planRow = ProviderDetailView<EmptyView>.planRow(
@@ -313,12 +321,12 @@ private struct ProviderDetailInfoGrid: View {
             return UsageFormatter.updatedString(from: updated)
         }
         if self.store.refreshingProviders.contains(self.provider) {
-            return "Refreshing"
+            return PrototypeChineseLocalization.text("Refreshing")
         }
         if self.store.unavailableMessage(for: self.provider) != nil {
-            return "Unavailable"
+            return PrototypeChineseLocalization.text("Unavailable")
         }
-        return "Not fetched yet"
+        return PrototypeChineseLocalization.text("Not fetched yet")
     }
 }
 
@@ -351,7 +359,7 @@ struct ProviderMetricsInlineView: View {
         let hasProviderCost = self.model.providerCost != nil
         let hasTokenUsage = self.model.tokenUsage != nil
         ProviderSettingsSection(
-            title: "Usage",
+            title: PrototypeChineseLocalization.text("Usage"),
             spacing: 8,
             verticalPadding: 6,
             horizontalPadding: 0)
@@ -378,7 +386,7 @@ struct ProviderMetricsInlineView: View {
 
                 if let credits = self.model.creditsText {
                     ProviderMetricInlineTextRow(
-                        title: "Credits",
+                        title: PrototypeChineseLocalization.text("Credits"),
                         value: credits,
                         labelWidth: self.labelWidth)
                 }
@@ -392,7 +400,7 @@ struct ProviderMetricsInlineView: View {
 
                 if let tokenUsage = self.model.tokenUsage {
                     ProviderMetricInlineTextRow(
-                        title: "Cost",
+                        title: PrototypeChineseLocalization.text("Cost"),
                         value: tokenUsage.sessionLine,
                         labelWidth: self.labelWidth)
                     ProviderMetricInlineTextRow(
@@ -406,9 +414,9 @@ struct ProviderMetricsInlineView: View {
 
     private var placeholderText: String {
         if !self.isEnabled {
-            return "Disabled — no recent data"
+            return PrototypeChineseLocalization.text("Disabled — no recent data")
         }
-        return self.model.placeholder ?? "No usage yet"
+        return self.model.placeholder ?? PrototypeChineseLocalization.text("No usage yet")
     }
 }
 
@@ -544,11 +552,11 @@ private struct ProviderMetricInlineCostRow: View {
                 UsageProgressBar(
                     percent: self.section.percentUsed,
                     tint: self.progressColor,
-                    accessibilityLabel: "Usage used")
+                    accessibilityLabel: PrototypeChineseLocalization.text("Usage used"))
                     .frame(minWidth: ProviderSettingsMetrics.metricBarWidth, maxWidth: .infinity)
 
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Text(String(format: "%.0f%% used", self.section.percentUsed))
+                    Text(String(format: PrototypeChineseLocalization.text("%.0f%% used"), self.section.percentUsed))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                         .monospacedDigit()

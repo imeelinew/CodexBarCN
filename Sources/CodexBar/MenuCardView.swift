@@ -112,7 +112,7 @@ struct UsageMenuCardView: View {
 
     static func popupMetricTitle(provider: UsageProvider, metric: Model.Metric) -> String {
         if provider == .openrouter, metric.id == "primary" {
-            return "API Key 限额"
+            return PrototypeChineseLocalization.text("API Key 限额")
         }
         return PrototypeChineseLocalization.text(metric.title)
     }
@@ -310,7 +310,7 @@ private struct CopyIconButton: View {
                 .frame(width: 18, height: 18)
         }
         .buttonStyle(CopyIconButtonStyle(isHighlighted: self.isHighlighted))
-        .accessibilityLabel(self.didCopy ? "Copied" : "Copy error")
+        .accessibilityLabel(self.didCopy ? PrototypeChineseLocalization.text("Copied") : PrototypeChineseLocalization.text("Copy error"))
     }
 
     private func copyToPasteboard() {
@@ -538,19 +538,19 @@ private struct CreditsBarContent: View {
 
     private var scaleText: String {
         let scale = UsageFormatter.tokenCountString(Int(Self.fullScaleTokens))
-        return "\(scale) tokens"
+        return "\(scale) \(PrototypeChineseLocalization.text("tokens"))"
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("积分")
+            Text(PrototypeChineseLocalization.text("Credits"))
                 .font(.body)
                 .fontWeight(.medium)
             if let percentLeft {
                 UsageProgressBar(
                     percent: percentLeft,
                     tint: self.progressColor,
-                    accessibilityLabel: "剩余积分")
+                    accessibilityLabel: PrototypeChineseLocalization.text("Credits") + PrototypeChineseLocalization.text("remaining"))
                 HStack(alignment: .firstTextBaseline) {
                     Text(self.creditsText)
                         .font(.caption)
@@ -791,7 +791,7 @@ extension UsageMenuCardView.Model {
                resolvedSource == "cli",
                !notes.contains(where: { $0.caseInsensitiveCompare("Using CLI fallback") == .orderedSame })
             {
-                notes.append("Using CLI fallback")
+                notes.append(PrototypeChineseLocalization.text("Using CLI fallback"))
             }
             return notes
         }
@@ -809,8 +809,8 @@ extension UsageMenuCardView.Model {
 
         return switch openRouter.keyQuotaStatus {
         case .available: []
-        case .noLimitConfigured: ["No limit set for the API key"]
-        case .unavailable: ["API key limit unavailable right now"]
+        case .noLimitConfigured: [PrototypeChineseLocalization.text("No limit set for the API key")]
+        case .unavailable: [PrototypeChineseLocalization.text("API key limit unavailable right now")]
         }
     }
 
@@ -1322,7 +1322,7 @@ extension UsageMenuCardView.Model {
             let currentStr = UsageFormatter.tokenCountString(currentValue)
             let usageStr = UsageFormatter.tokenCountString(usage)
             let remainingStr = UsageFormatter.tokenCountString(remaining)
-            return "\(currentStr) / \(usageStr) (\(remainingStr) remaining)"
+            return "\(currentStr) / \(usageStr) (\(remainingStr) \(PrototypeChineseLocalization.text("remaining")))"
         }
 
         return nil
@@ -1340,7 +1340,7 @@ extension UsageMenuCardView.Model {
 
         let remaining = UsageFormatter.usdString(keyRemaining)
         let limit = UsageFormatter.usdString(keyLimit)
-        return "\(remaining)/\(limit) left"
+        return "\(remaining)/\(limit) \(PrototypeChineseLocalization.text("left"))"
     }
 
     private struct PaceDetail {

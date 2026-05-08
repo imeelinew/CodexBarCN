@@ -270,7 +270,7 @@ struct ProviderSettingsTokenAccountsRowView: View {
                             }
                             .buttonStyle(.plain)
 
-                            Button("Remove") {
+                            Button(PrototypeChineseLocalization.text("Remove")) {
                                 self.descriptor.removeAccount(account.id)
                             }
                             .buttonStyle(.bordered)

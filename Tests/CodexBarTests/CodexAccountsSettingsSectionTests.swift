@@ -222,7 +222,7 @@ struct CodexAccountsSettingsSectionTests {
         let visibleAccount = try #require(state.visibleAccounts.first { $0.email == "managed@example.com" })
 
         #expect(state.canAddAccount == false)
-        #expect(state.addAccountTitle == "Adding Account…")
+        #expect(state.addAccountTitle == "正在添加账号…")
         #expect(state.canReauthenticate(visibleAccount) == false)
 
         await runner.resume()
