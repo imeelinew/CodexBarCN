@@ -386,6 +386,9 @@ PLIST
   install_binary "CodexBarWidget" "$WIDGET_APP/Contents/MacOS/CodexBarWidget"
   generate_widget_appintents_metadata "$WIDGET_APP/Contents/Resources"
 fi
+# Set default adhoc signing params (always needed for clean bundle)
+CODESIGN_ID="-"
+CODESIGN_ARGS=(--force --sign "$CODESIGN_ID")
 # Embed Sparkle.framework
 if [[ -d ".build/$CONF/Sparkle.framework" ]]; then
   cp -R ".build/$CONF/Sparkle.framework" "$APP/Contents/Frameworks/"
